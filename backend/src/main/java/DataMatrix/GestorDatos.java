@@ -2,7 +2,6 @@ package DataMatrix;
 
 import java.sql.*;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class GestorDatos {
@@ -29,17 +28,22 @@ public class GestorDatos {
 
     // Método general para los insertar filas.
     protected void insertar(String nombreTabla, List<String> nombreColumnas, List<String> valores) throws SQLException {
+        String instruccion = "INSERT";
+
         // Se establece la conexión con la base de datos.
         Statement statement = establecerConexion();
 
-        // Se construye la query: Las List<String> que llegan que "splitean" por comas en una String.
-        String query = "INSERT INTO " + nombreTabla + " (" + String.join(",", nombreColumnas) + ") VALUES (" + String.join(",", valores) + ")";
-
         // Ejecución de la sentencia
-        statement.execute(query);
+        instruccionSQL(instruccion, nombreTabla, nombreColumnas, valores);
     }
     protected void insertar(String nombreTabla, String nombreColumna, String valor) throws SQLException {
         insertar(nombreTabla, List.of(nombreColumna), List.of(valor));
+    }
+
+    protected Object consultar(String nombreTabla, String nombreColumna) throws SQLException {
+        String instruccion = "SELECT";
+
+        return instruccionSQL(instruccion, nombreTabla, List.of(nombreColumna));
     }
 
     /**
@@ -58,21 +62,30 @@ public class GestorDatos {
         String nombreTabla = "revision";
         String nombreColumna = "fecha_revision";
 
-        insertar(nombreTabla, nombreColumna, "convert(datetime,'18-06-12 10:34:09 PM',5)");
+        insertar(nombreTabla, nombreColumna, "convert(datetime,'" + valor.toString() + "')");
     }
 
-    public void consultar(String condicionante) throws SQLException {
+    public Object instruccionSQL(String instruccion, String nombreTabla, List<String> nombreColumnas, List<String> valores, String condicion) throws SQLException {
+        String query = "";
         // Se establece la conexión con la base de datos.
         Statement statement = establecerConexion();
 
-        // Se construye la query: Las List<String> que llegan que "splitean" por comas en una String.
-        String query = "SELECT INTO " + nombreTabla + " (" + String.join(",", nombreColumnas) + ") VALUES (" + String.join(",", valores) + ")";
+        switch (instruccion) {
+            case "SELECT":
+                query = "SELECT " + nombreColumnas + " FROM " + nombreTabla;
+            case "INSERT":
+                query = "INSERT INTO " + nombreTabla + " (" + String.join(",", nombreColumnas) + ") VALUES (" + String.join(",", valores) + ")";
+            case "DELETE":
+                query = "DELETE FROM " + nombreTabla + " WHERE " + nombreColumnas + " LIKE " + "'" + condicion + "'";
+        }
 
         // Ejecución de la sentencia
-        statement.execute(query);
+        return statement.execute(query);
     }
-
-    protected void ejecutarQuery() {
-        
+    public Object instruccionSQL(String instruccion, String nombreTabla, List<String> nombreColumnas, List<String> valores) throws SQLException {
+        return instruccionSQL(instruccion, nombreTabla, nombreColumnas, valores, null);
+    }
+    public Object instruccionSQL(String instruccion, String nombreTabla, List<String> nombreColumnas) throws SQLException {
+        return instruccionSQL(instruccion, nombreTabla, nombreColumnas, null, null);
     }
 }
