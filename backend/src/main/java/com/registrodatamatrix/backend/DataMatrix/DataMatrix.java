@@ -1,4 +1,4 @@
-package DataMatrix;
+package com.registrodatamatrix.backend.DataMatrix;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
