@@ -1,0 +1,184 @@
+public interface JobRepository extends JpaRepository<Job, String> {
+
+    Optional<Job> findJobByEnterpriseAndShortName (Enterprise e, String shortName);
+    Optional<Job> findJobByEnterpriseAndName (Enterprise e, String name);
+    Optional<Job> findJobById (String id);
+    List<Job> findByEmployees(Set<User> usersId);
+    List<Job> findByEnterprise(Enterprise enterprise);
+    List<Job> findByCategoryName (String categoryname);
+    List<Job> findByJobAreas(Set<AreaTreeNode> areaTreeNodes);
+    //List<String> findJobByJobAreas(Set<Job> areaTreeNodes);
+    @Query("from Job e where e.employees  = :employees")
+    List<Job> findAllByUser(Set<User> employees);
+    @Query("from Job e where e.enterprise  = :enterprise   " +
+            "and  upper(concat(e.name, e.shortName, e.description)) like  upper(:filter) "  )
+    List<Job> findAllByAreaTreeNode_AreaTree_Enterprise(Enterprise enterprise, String filter,  Pageable pageable);
+    @Query("select count(id) from Job e where e.enterprise  = :enterprise  " +
+            "and  upper(concat(e.name, e.shortName, e.description)) like  upper(:filter) "  )
+    Long countAllByAreaTreeNode_AreaTree_Enterprise(Enterprise enterprise, String filter);
+    @Query("select distinct e from Job e JOIN AreaTreeNode atn ON atn member of e.jobAreas and (atn.areatreenodeId in :atnID)  " +
+            " WHERE  upper(concat(e.name, e.shortName, e.description)) like  upper(:filter) ")
+    List<Job> findAllByAreaTreeNodeInCollection(Set<Long> atnID, String filter,  Pageable pageable );
+    @Query("select count( distinct  e.id) from Job e JOIN AreaTreeNode atn ON atn member of e.jobAreas and (atn.areatreenodeId in :atnID) " +
+            " WHERE  upper(concat(e.name, e.shortName, e.description)) like  upper(:filter) ")
+    Long countAllByAreaTreeNodeInCollection(Set<Long> atnID, String filter);
+    List <Job> findAllByJobAreasContains(AreaTreeNode atn, Pageable pageable);
+    Long countAllByJobAreas(AreaTreeNode atn);
+    Optional<Job> findByNameAndEnterprise(String name, Enterprise e);
+    Optional<Job> findByShortNameAndEnterprise(String shortName, Enterprise e);
+
+
+}
+
+---------------------------
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.itbacking.imespyme.model.audit.DateAudit;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.ManyToAny;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "jobs", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "name","enterpriseId"
+        }),
+        @UniqueConstraint(columnNames = {
+                "shortName","enterpriseId"
+        })
+
+})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Cacheable
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_WRITE, region="Job")
+public class Job implements Serializable {
+
+    @Id @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name="system-uuid", strategy =  "uuid2")
+    @Column(name="jobId", unique =true)
+    private String id;
+
+    @NotBlank
+    private String name;
+
+    @NotBlank
+    private String shortName;
+
+    @NotBlank
+    @Column (length = 2000)
+    @Size(max=2000)
+    private String description;
+
+    @ManyToOne (fetch = FetchType.EAGER)
+    private Job manager;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "jobId")
+    private Set<JobsPermissions> permissions = new HashSet<>();
+
+
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable (name="jobAreas",joinColumns =@JoinColumn(name="areaTreeNodeId"))
+    private Set<AreaTreeNode> jobAreas = new HashSet<>();
+
+    @ManyToOne (fetch =  FetchType.EAGER)
+    @JoinColumn (name = "jobCategoryId")
+    private JobCategory category;
+
+
+
+    @ManyToMany (fetch =  FetchType.EAGER)
+    @JoinTable(name = "jobsusers", joinColumns = @JoinColumn(name="job_user"),
+            inverseJoinColumns = @JoinColumn(name = "user_job"))
+    private Set<User> employees = new HashSet<>();
+
+
+    @NotNull
+    @ManyToOne (fetch = FetchType.EAGER)
+    @JoinColumn(name = "enterpriseId")
+    private Enterprise enterprise;
+
+
+    public Job(){}
+
+
+
+    public Job(@NotBlank String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {this.id = id;}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Job getManager() {
+        return manager;
+    }
+
+    public void setManager(Job manager) {
+        this.manager = manager;
+    }
+
+
+    public Set<AreaTreeNode> getJobAreas() {return jobAreas;}
+
+    public void setJobAreas(Set<AreaTreeNode> jobAreas) { this.jobAreas = jobAreas; }
+
+    public JobCategory getCategory() {return category;}
+
+    public void setCategory(JobCategory category) {this.category = category;}
+
+    public Set<User> getEmployees() {return employees;}
+
+    public void setEmployees(Set<User> employees) {this.employees = employees;}
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<JobsPermissions> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Set<JobsPermissions> permissions) {
+        this.permissions = permissions;
+    }
+}
