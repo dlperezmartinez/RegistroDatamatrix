@@ -31,4 +31,9 @@ public class TestBaseDatos {
         gestorDatos.insertarArticulo(valoresPrueba);
 //        gestorDatos.insertarRevision(date);
     }
+
+    @Test
+    public void testConSpring () {
+
+    }
 }

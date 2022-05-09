@@ -1,10 +1,11 @@
-package com.registrodatamatrix.backend.DB;
+package com.registrodatamatrix.backend.DB.Tablas;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "articulo")
 public class Articulo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

@@ -1,7 +1,5 @@
 package com.registrodatamatrix.backend.Controlador;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,31 +8,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bbtutorials.users.entity.Users;
-import com.bbtutorials.users.links.UserLinks;
-import com.bbtutorials.users.service.UsersService;
+import com.registrodatamatrix.backend.Services.DBService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @RestController
 @RequestMapping("/api/")
 public class Controlador {
 
     @Autowired
-    UsersService usersService;
+    DBService dbService;
 
-    @GetMapping(path = UserLinks.LIST_USERS)
-    public ResponseEntity<?> listUsers() {
-        log.info("UsersController:  list users");
-        List<Users> resource = usersService.getUsers();
-        return ResponseEntity.ok(resource);
+    @GetMapping("consultar")
+    public ResponseEntity<?> consultar() {
+        return Response;
     }
 
-    @PostMapping(path = UserLinks.ADD_USER)
-    public ResponseEntity<?> saveUser(@RequestBody Users user) {
-        log.info("UsersController:  list users");
-        Users resource = usersService.saveUser(user);
-        return ResponseEntity.ok(resource);
-    }
+
 }

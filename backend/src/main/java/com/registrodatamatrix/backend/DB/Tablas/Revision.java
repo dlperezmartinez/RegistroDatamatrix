@@ -1,4 +1,4 @@
-package com.registrodatamatrix.backend.DB;
+package com.registrodatamatrix.backend.DB.Tablas;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -6,6 +6,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "revision")
 public class Revision {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -18,7 +19,7 @@ public class Revision {
     }
 
     public Revision() {
-        
+
     }
 
     public Integer getId() {

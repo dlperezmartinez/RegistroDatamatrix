@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DbServiceService } from 'src/app/services/db-service.service';
 
 @Component({
   selector: 'app-tabla',
@@ -8,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablaComponent implements OnInit {
 
-  constructor() { }
+  constructor( private dbService: DbServiceService ) { }
 
   ngOnInit(): void {
   }
 
+  test() {
+    this.dbService.consultar("consultar") //TODO CAMBIAR
+  }
 }
