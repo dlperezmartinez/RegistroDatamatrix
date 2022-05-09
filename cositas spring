@@ -182,3 +182,144 @@ public class Job implements Serializable {
         this.permissions = permissions;
     }
 }
+-----------CONTROLLER---------------------
+@RestController
+@RequestMapping("/api/partes")
+public class ControladorPartes {
+    
+    @Autowired
+    PartesTrabajoService partesTrabajoService;
+
+    @PostMapping("/leer")
+    public ResponseEntity<?> leer(@CurrentUser UserSummary currentUser,@RequestParam String entidad, @RequestBody Coleccion parametros)
+    {
+        try {
+            if(parametros.get("recurso").aCadena()=="")
+                parametros.asignar("recurso",currentUser.username);
+
+            return Respuesta.okList(partesTrabajoService.leerEntidad(entidad,parametros));
+        } catch (Exception ex) {
+            ex.logError();
+            return Respuesta.internalServerError(ex);
+        }
+    }
+
+    @PostMapping("/mantenimiento")
+    public ResponseEntity<?> mantenimiento(@CurrentUser UserSummary currentUser,@RequestParam String accion, @RequestBody Coleccion parametros)
+    {
+        try {
+            if(parametros.get("recurso").aCadena()=="")
+                parametros.asignar("recurso",currentUser.username);
+
+            return Respuesta.ok(partesTrabajoService.mantenimiento(accion,parametros));
+        } catch (Exception ex) {
+            ex.logError();
+            return Respuesta.internalServerError(ex);
+        }
+    }
+    ---------------SERVICE-----------------
+    @Service
+public class PartesTrabajoService {
+
+    protected Conexion conexionPartes;
+    protected ConectorDb conectorPartes;
+    protected ConectorDb conectorLineaRecurso;
+    protected ConectorDb conectorLineaMaterial;
+    protected ConectorDb conectorTiemposParte;
+    protected ConectorDb conectorFichajesInfoplanta;
+    protected PartesTrabajoInterface conectorERP;
+
+    public PartesTrabajoService() {
+        conectorERP=new PartesITBNav6();
+    }
+
+    //region conexion
+
+    private Conexion crearConexion()
+    {
+        var tipo=Config.leerParametroString("Partes.tipo");
+        var servidor = Config.leerParametroString("Partes.servidor");
+        var bd = Config.leerParametroString("Partes.basedatos");
+        var user = Config.leerParametroString("Partes.usuario");
+        var password = Config.leerParametroString("Partes.password");
+        var puerto = Config.leerParametroString("Partes.puerto");
+        var confConexion=new ConfiguracionConexion( TipoConexion.valueOf( tipo),servidor,bd,user,password,puerto.aInteger());
+
+        return confConexion.crearConexion();
+    }
+
+    private void asegurarConexion()
+    {
+        if(conexionPartes!=null) return;
+        conexionPartes= crearConexion();
+        conectorPartes=conexionPartes.obtenerConectorDb("Parte");
+        conectorLineaRecurso=conexionPartes.obtenerConectorDb("LineaParteRecurso");
+        conectorLineaMaterial=conexionPartes.obtenerConectorDb("LineaParteMaterial");
+        conectorTiemposParte=conexionPartes.obtenerConectorDb("TiemposParte");
+        conectorFichajesInfoplanta =conexionPartes.obtenerConectorDb("LineasFichajeInfoplanta");
+    }
+
+    //endregion
+
+    //region partes
+
+    public List<Map<String,Object>> leerEntidad(String entidad,Coleccion valores) throws Exception {
+        switch (entidad)
+        {
+            case "PARTES":
+                return leerPartes(valores);
+            case "LINEAS_RECURSO":
+                return leerLineasRecurso(valores);
+            case "LINEAS_MATERIAL":
+                return leerLineasMaterial(valores);
+            //Fichaje
+            case "LEER_LINEAS_FICHAJE_DIARIO":
+                return leerLineasFichaje(valores);
+            /*Poner un case para leer los fichajes del dia
+            case leerLineasFichajeDiario
+            llamara a un metodo a una tabla que hay que crear lineas fichaje infoplanta
+            usar un conector a crear
+            cuando crear las lineas porque estan cerradas las ateriores depende de como esten las anreriores habra que hacer una cosa u otra
+              otro metodo mantenimiento ficharLinainfoplanta Upadate
+              importado booleano, inicio, fin, recurso, ot, id //filtra por recurso
+              dos metodos realizar fichaje y leer fichaje sonre la misma tabla
+            */
+        }
+        return conectorERP.leerEntidad(entidad,valores);
+    }
+
+    public Map<String,Object> mantenimiento(String accion,Coleccion valores) throws Exception {
+        switch (accion)
+        {
+                //Parte
+            case "CREAR_PARTE":
+                return crearParteTrabajo(valores);
+            case "ACTUALIZAR_PARTE":
+                return actualizarParteTrabajo(valores);
+            case "CONMUTAR_ESTADO_PARTE":
+                return conmutarEstadoParteTrabajo(valores);
+
+                //Lineas Recurso
+            case "CREAR_LINEA_RECURSO":
+                return crearLineaParteRecurso(valores);
+            case "ACTUALIZAR_LINEA_RECURSO":
+                return actualizarLineaParteRecurso(valores);
+            case "ELIMINAR_LINEA_RECURSO":
+                return eliminarLineaParteRecurso(valores);
+
+                //Lineas Material
+            case "CREAR_LINEA_MATERIAL":
+                return crearLineaParteMaterial(valores);
+            case "ACTUALIZAR_LINEA_MATERIAL":
+                return actualizarLineaParteMaterial(valores);
+            case "ELIMINAR_LINEA_MATERIAL":
+                return eliminarLineaParteMaterial(valores);
+
+            //Fichajes
+            case "CREAR_LINEA_FICHAJE":
+                return ficharInfoplanta(valores);
+
+        }
+        return conectorERP.mantenimiento(accion,valores);
+    }
+
