@@ -5,12 +5,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DbServiceService {
-  root = "/api/";
+  private rootUrl      = "http://localhost:8080/api/";
+  private consultarUrl = "consultar";
 
   constructor( private http: HttpClient ) { }
 
   consultar ( accion: string ) {
-    this.http.get( this.root + accion )
+    this.http.get( this.rootUrl + this.consultarUrl )
       .subscribe( resp => console.log( resp ) );
   }
 }
