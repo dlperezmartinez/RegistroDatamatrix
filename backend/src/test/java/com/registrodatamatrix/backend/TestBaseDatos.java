@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
-import com.registrodatamatrix.backend.DataMatrix.*;
+import com.registrodatamatrix.backend.datamatrix.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

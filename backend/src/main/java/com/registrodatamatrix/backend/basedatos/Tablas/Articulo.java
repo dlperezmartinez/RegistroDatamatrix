@@ -1,4 +1,6 @@
-package com.registrodatamatrix.backend.DB.Tablas;
+package com.registrodatamatrix.backend.basedatos.Tablas;
+
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
@@ -8,7 +10,9 @@ public class Articulo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+
+    @NotNull
     private String nombre;
     private String modelo;
 
@@ -21,7 +25,7 @@ public class Articulo {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -33,7 +37,7 @@ public class Articulo {
         return modelo;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

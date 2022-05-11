@@ -15,6 +15,6 @@ export class TablaComponent implements OnInit {
   }
 
   test() {
-    this.dbService.consultar("consultar") //TODO CAMBIAR
+    this.dbService.consultar("articulos") //TODO CAMBIAR
   }
 }

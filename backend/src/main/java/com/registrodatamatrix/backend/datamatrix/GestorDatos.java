@@ -1,4 +1,4 @@
-package com.registrodatamatrix.backend.DataMatrix;
+package com.registrodatamatrix.backend.datamatrix;
 
 import java.sql.*;
 import java.util.Arrays;
