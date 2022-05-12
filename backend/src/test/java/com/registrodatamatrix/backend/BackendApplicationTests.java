@@ -1,7 +1,5 @@
 package com.registrodatamatrix.backend;
 
-import com.registrodatamatrix.backend.controlador.Controlador;
-import com.registrodatamatrix.backend.basedatos.Tablas.Articulo;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

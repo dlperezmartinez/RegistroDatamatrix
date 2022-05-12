@@ -40,6 +40,11 @@ public class DBService {
         return articuloRepository.save(articulo);
     }
 
+    public Articulo actualizarArticulo(Articulo articulo) {
+        return articuloRepository.save(articulo);
+    }
+
+
     public void eliminarArticulo(Long id) {
         articuloRepository.deleteById(id);
     }

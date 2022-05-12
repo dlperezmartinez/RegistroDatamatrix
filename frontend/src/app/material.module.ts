@@ -4,7 +4,11 @@ import { CommonModule } from '@angular/common';
 // Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+
+// fxFlex
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [],
@@ -14,13 +18,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     // Material
     MatButtonModule,
     MatIconModule,
+    MatListModule,
     MatToolbarModule,
+
+    // fxFlex
+    FlexLayoutModule,
   ],
   exports: [
     // Material
     MatButtonModule,
     MatIconModule,
-    MatToolbarModule
+    MatListModule,
+    MatToolbarModule,
+
+    // fxFlex
+    FlexLayoutModule,
   ]
 })
 export class MaterialModule { }

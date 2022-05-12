@@ -12,15 +12,16 @@ import { MaterialModule } from '../material.module';
   declarations: [
     TablaComponent,
     ToolbarComponent,
-    SidenavComponent
+    SidenavComponent,
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
-    MaterialModule
+    MaterialModule,
   ],
   exports: [
-    ToolbarComponent
+    ToolbarComponent,
+    TablaComponent,
   ]
 })
 export class SharedModule { }

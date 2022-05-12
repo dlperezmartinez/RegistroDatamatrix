@@ -1,4 +1,31 @@
-<button
-    mat-raised-button
-    (click)="test()"
-    >TEST</button>
+<!-- TABLA -->
+<mat-selection-list [multiple]="false">
+    <mat-list-option class="cabecera-lista">
+        <div class="cabecera-lista" fxFlex="row">
+            <div fxFlex="33%"> {{ "nombre"       | uppercase }} </div>
+            <div fxFlex="33%"> {{ "modelo"       | uppercase }} </div>
+            <div fxFlex="33%"> {{ "última fecha" | uppercase }} </div>
+        </div>
+    </mat-list-option>
+    <mat-list-option 
+        class="elementos-lista"
+        *ngFor="let articulo of this.articulos"
+        [value]="articulo"
+        (click)="elementoSeleccionado()"
+        (dblclick)="test()"
+        >
+        <div class="elementos-lista" fxFlex="row">
+            <div fxFlex="33%">{{ articulo.nombre | titlecase }}</div>
+            <div fxFlex="33%">{{ articulo.modelo | titlecase }}</div>
+            <div fxFlex="33%">{{ articulo.modelo | titlecase }}</div>
+        </div>
+    </mat-list-option>
+</mat-selection-list>
+
+<!-- BOTONES-PIE -->
+<mat-toolbar class="container botones-pie">
+    <button mat-raised-button color="warn" [disabled]="!seleccionado">Eliminar</button>
+    <span class="espaciador"></span>
+    <button mat-raised-button color="primary">Primary</button>
+    <button mat-raised-button color="accent">Consultar revisiones</button>
+</mat-toolbar>

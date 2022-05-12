@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
   // VARIABLES
-  titulo: string = "TÍTULO";
+  titulo: string = "REGISTRO DATAMATRIX";
 
   // CONSTRUCTOR Y NGON's
   constructor() { }
