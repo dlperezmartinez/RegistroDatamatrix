@@ -8,8 +8,10 @@ import com.registrodatamatrix.backend.excepciones.ArticuloNoEncontradoExcepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,14 +46,19 @@ public class DBService {
         return articuloRepository.save(articulo);
     }
 
-
     public void eliminarArticulo(Long id) {
         articuloRepository.deleteById(id);
     }
 
     // REVISIONES
-    public Revision consultarRevisionesPorId(Long id) {
-        return revisionRepository.findRevisionesById(id).orElseThrow(() -> new ArticuloNoEncontradoExcepcion("No hay revisiones"));
+    public List<Date> consultarRevisionPorArticulo(Articulo articulo) {
+        Long idArticulo = articulo.getId(); //TODO: Preguntar si esto es correcto.
+        return revisionRepository.findRevisionesByArticulo(idArticulo).orElseThrow(() -> new ArticuloNoEncontradoExcepcion("No hay revisiones"));
+    }
+
+    public Date consultarUltimaRevisionPorArticulo(Articulo articulo) {
+        Long idArticulo = articulo.getId(); //TODO: Preguntar si esto es correcto.
+        return revisionRepository.findLastRevisionByArticulo(idArticulo).orElseThrow(() -> new ArticuloNoEncontradoExcepcion("No hay revisiones"));
     }
 
     public Revision insertarRevision(Revision revision) {
@@ -61,4 +68,5 @@ public class DBService {
     public Revision actualizarRevision(Revision revision) {
         return revisionRepository.save(revision);
     }
+
 }

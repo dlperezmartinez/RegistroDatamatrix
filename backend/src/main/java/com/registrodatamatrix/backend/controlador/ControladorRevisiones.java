@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,17 +22,31 @@ public class ControladorRevisiones {
     }
 
     @GetMapping("consultar")
-    public ResponseEntity<List<Revision>> consultar(Long id) {
+    public ResponseEntity<List<Date>> consultar(String opcion, @RequestBody Articulo articulo) {
 
-        List<Revision> respuesta = List.of(dbService.consultarRevisionesPorId(id));
-        return new ResponseEntity<>(respuesta, HttpStatus.OK);
+        switch (opcion) {
+            case "todo":
+                List<Date> respuestaFechas = dbService.consultarRevisionPorArticulo(articulo);
+                return new ResponseEntity<>(respuestaFechas, HttpStatus.OK);
+            case "ultima":
+                List<Date> respuestaUltimaFecha = List.of(dbService.consultarUltimaRevisionPorArticulo(articulo));
+                return new ResponseEntity<>(respuestaUltimaFecha, HttpStatus.OK);
+        }
+        return null; //TODO CAMBIAR
     }
 
     //TODO: Mirar lo de ResponseEntity<List<Revision>> (Quizás no haga falta devolver listas siempre).
     @PostMapping("insertar")
-    public ResponseEntity<List<Revision>> insertar(@RequestBody Revision revision) {
+    public ResponseEntity<List<Revision>> insertar(@RequestBody Articulo articulo, Date fecha) {
+        // Se extrae el id del Articulo que llega.
+        Long idArticulo = articulo.getId();
 
-        List<Revision> respuestaRevision = List.of(dbService.insertarRevision(revision));
+        // Se crea una nueva Revision y se le setean los campos.
+        Revision nuevarevision = new Revision();
+        nuevarevision.setArticulo(articulo);
+        nuevarevision.setFecha_revision(fecha);
+
+        List<Revision> respuestaRevision = List.of(dbService.insertarRevision(nuevarevision));
         return new ResponseEntity<>(respuestaRevision, HttpStatus.CREATED);
     }
 

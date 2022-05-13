@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
@@ -12,7 +12,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
   // VARIABLES
-  titulo: string = "REGISTRO DATAMATRIX";
+  titulo : string = "REGISTRO DATAMATRIX";
+  seccion: string = "";
+  
+  @Input() set setSeccion( seccion: string ) { this.seccion = seccion } 
 
   // CONSTRUCTOR Y NGON's
   constructor() { }

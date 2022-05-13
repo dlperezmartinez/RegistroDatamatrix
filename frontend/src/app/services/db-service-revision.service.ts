@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
+import { Articulo } from '../db/articulo';
 import { Revision } from '../db/revision';
 
 @Injectable({
@@ -12,9 +13,15 @@ export class DbServiceRevisionService {
 
   constructor( private http: HttpClient ) { }
 
-  consultar ( id: number ): Observable<Revision[]> {
-    return this.http.get<Revision[]>( this.rootUrl + "consultar?id=" + id);
-      // .subscribe( resp => console.log( resp ) );
-  }
+  // consultar ( opcion: string, articulo: Articulo ): Observable<Date[]> {
+  //   return this.http.get<Date[]>( this.rootUrl + "consultar?opcion=" + opcion, {body: articulo} );
+  // }
 
+  insertar ( articulo: Articulo ): Observable<Revision[]> {
+    return this.http.post<Revision[]>( this.rootUrl + "insertar", articulo );
+  }  
+
+  actualizar ( articulo: Revision ): Observable<Revision> {
+    return this.http.post<Revision>( this.rootUrl + "insertar", articulo );
+  }  
 }

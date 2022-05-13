@@ -3,7 +3,7 @@ package com.registrodatamatrix.backend.basedatos.Tablas;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "revision")
@@ -14,7 +14,7 @@ public class Revision {
     private Long id;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_articulo")
     private Articulo articulo;
 

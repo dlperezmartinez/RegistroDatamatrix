@@ -1,5 +1,5 @@
 export class Articulo {
-    id      : string = "";
+    id      : number = 0;
     nombre  : string = "";
     modelo  : string = "";
 }

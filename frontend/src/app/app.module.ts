@@ -9,6 +9,7 @@ import { MaterialModule } from './material.module';
 import { SharedModule } from './shared/shared.module';
 import { DbServiceServiceArticulo } from './services/db-service-articulo.service';
 import { DbServiceRevisionService } from './services/db-service-revision.service';
+import { DirectivesModule } from './directives/directives.module';
 
 @NgModule({
   declarations: [
@@ -21,11 +22,13 @@ import { DbServiceRevisionService } from './services/db-service-revision.service
     HttpClientModule,
     
     //Mis módulos
+    DirectivesModule,
     MaterialModule,
     SharedModule,
   ],
   exports: [
-    MaterialModule
+    DirectivesModule,
+    MaterialModule,
   ],
   providers: [
     DbServiceServiceArticulo,

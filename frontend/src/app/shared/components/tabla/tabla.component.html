@@ -1,19 +1,19 @@
 <!-- TABLA -->
-<mat-selection-list [multiple]="false">
+        <mat-selection-list #listaArticulos [multiple]="false">
     <mat-list-option class="cabecera-lista">
         <div class="cabecera-lista" fxFlex="row">
-            <div fxFlex="33%"> {{ "nombre"       | uppercase }} </div>
-            <div fxFlex="33%"> {{ "modelo"       | uppercase }} </div>
-            <div fxFlex="33%"> {{ "última fecha" | uppercase }} </div>
+            <div fxFlex="33%"> {{ "nombre"          | uppercase }} </div>
+            <div fxFlex="33%"> {{ "modelo"          | uppercase }} </div>
+            <div fxFlex="33%"> {{ "última revisión" | uppercase }} </div>
         </div>
     </mat-list-option>
     <mat-list-option 
         class="elementos-lista"
         *ngFor="let articulo of this.articulos"
         [value]="articulo"
-        (click)="elementoSeleccionado()"
-        (dblclick)="test()"
+        (click)="elementoSeleccionado(listaArticulos.selectedOptions.selected[0]?.value)"
         >
+    <!-- (dblclick)="test()" -->
         <div class="elementos-lista" fxFlex="row">
             <div fxFlex="33%">{{ articulo.nombre | titlecase }}</div>
             <div fxFlex="33%">{{ articulo.modelo | titlecase }}</div>
@@ -24,8 +24,21 @@
 
 <!-- BOTONES-PIE -->
 <mat-toolbar class="container botones-pie">
-    <button mat-raised-button color="warn" [disabled]="!seleccionado">Eliminar</button>
+    <!-- ELIMINAR -->
+    <button mat-raised-button color="warn" 
+        [disabled]="!articuloSeleccionado.id"
+        (click)="eliminarArticulo()"
+        >Eliminar</button>
+
     <span class="espaciador"></span>
-    <button mat-raised-button color="primary">Primary</button>
-    <button mat-raised-button color="accent">Consultar revisiones</button>
+
+    <!-- ETIQUETA CODIGO DATA MATRIX -->
+    <button mat-raised-button color="primary"
+        [disabled]="!articuloSeleccionado.id"
+        >Etiqueta Data Matrix</button>
+
+    <!-- NUEVO ARTICULO -->
+    <button mat-raised-button color="accent"
+        (click)="nuevoArticulo()"
+        >Nuevo</button>
 </mat-toolbar>

@@ -19,11 +19,11 @@ export class DbServiceServiceArticulo {
   }
 
   insertar ( articulo: Articulo ): Observable<Articulo[]> {
-    return this.http.post<Articulo[]>( this.rootUrl + "consultar?opcion=", articulo );
+    return this.http.post<Articulo[]>( this.rootUrl + "insertar", articulo );
   }  
   
-  actualizar ( articulo: Articulo ): Observable<Articulo[]> {
-    return this.http.put<Articulo[]>( this.rootUrl + "actualizar", articulo );
+  actualizar ( articulo: Articulo ): Observable<Articulo> {
+    return this.http.put<Articulo>( this.rootUrl + "actualizar", articulo );
   }
 
   eliminar ( id: number ): Observable<void> {

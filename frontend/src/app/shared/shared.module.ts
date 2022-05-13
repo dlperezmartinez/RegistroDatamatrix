@@ -6,6 +6,8 @@ import { TablaComponent } from './components/tabla/tabla.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { MaterialModule } from '../material.module';
+import { RegistroDataMatrixComponent } from './pages/registro-data-matrix/registro-data-matrix.component';
+import { NuevoArticuloComponent } from './pages/nuevo-articulo/nuevo-articulo.component';
 
 
 @NgModule({
@@ -13,6 +15,8 @@ import { MaterialModule } from '../material.module';
     TablaComponent,
     ToolbarComponent,
     SidenavComponent,
+    RegistroDataMatrixComponent,
+    NuevoArticuloComponent,
   ],
   imports: [
     CommonModule,
