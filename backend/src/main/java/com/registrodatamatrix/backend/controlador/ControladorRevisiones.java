@@ -21,15 +21,15 @@ public class ControladorRevisiones {
         this.dbService = dbService;
     }
 
-    @GetMapping("consultar")
-    public ResponseEntity<List<Date>> consultar(String opcion, @RequestBody Articulo articulo) {
+    @PostMapping("consultar")
+    public ResponseEntity<List<Date>> consultar(String opcion, @RequestBody List<Articulo> articulos) {
 
         switch (opcion) {
             case "todo":
-                List<Date> respuestaFechas = dbService.consultarRevisionPorArticulo(articulo);
+                List<Date> respuestaFechas = dbService.consultarRevisionPorArticulo(articulos.get(0)); //TODO CAMBIAR, controlar lo del 0
                 return new ResponseEntity<>(respuestaFechas, HttpStatus.OK);
             case "ultima":
-                List<Date> respuestaUltimaFecha = List.of(dbService.consultarUltimaRevisionPorArticulo(articulo));
+                List<Date> respuestaUltimaFecha = dbService.consultarUltimaRevisionPorArticulo(articulos);
                 return new ResponseEntity<>(respuestaUltimaFecha, HttpStatus.OK);
         }
         return null; //TODO CAMBIAR

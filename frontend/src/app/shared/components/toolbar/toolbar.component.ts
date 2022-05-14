@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RegistroDataMatrixComponent } from '../../pages/registro-data-matrix/registro-data-matrix.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,21 +9,28 @@ import { Component, Input, OnInit } from '@angular/core';
     .titulo {
       margin: 10px;
     }
+    .espaciador {
+      flex: 1 1 auto;
+    }
   `
   ]
 })
 export class ToolbarComponent implements OnInit {
   // VARIABLES
   titulo : string = "REGISTRO DATAMATRIX";
-  seccion: string = "";
+  seccion: string = "Sección por defecto";
   
   @Input() set setSeccion( seccion: string ) { this.seccion = seccion } 
 
   // CONSTRUCTOR Y NGON's
-  constructor() { }
+  constructor( public router: Router) { }
 
   ngOnInit(): void {
+    console.log("Router url toolbar: ", this.router.url);
   }
 
   // MÉTODOS
+  volver() {
+    this.router.navigate(['registro-datamatrix'])
+  }
 }

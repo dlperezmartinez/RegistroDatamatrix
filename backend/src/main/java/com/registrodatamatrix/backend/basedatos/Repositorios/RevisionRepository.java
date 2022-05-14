@@ -17,5 +17,5 @@ public interface RevisionRepository extends JpaRepository<Revision, Long> {
     Optional<List<Date>> findRevisionesByArticulo(Long idArticulo);
 
     @Query("SELECT max(r.fecha_revision) FROM Revision r WHERE r.articulo.id = ?1")
-    Optional<Date> findLastRevisionByArticulo(Long idArticulo);
+    Date findLastRevisionByArticulo(Long idArticulo);
 }

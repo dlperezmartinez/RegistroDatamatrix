@@ -11,14 +11,23 @@
 
   </mat-toolbar-row>
   
+  <!-- SECCIÓN -->
   <mat-toolbar-row>
 
-    <!-- SECCIÓN -->
-    <span>{{ seccion }}</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
+    <!-- VOLVER -->
+    <button 
+      mat-icon-button 
+      *ngIf="router.url !== '/registro-datamatrix'"
+      (click)="volver()"
+      >
+      <mat-icon>arrow_back</mat-icon>
     </button>
+
+    <!-- TÍTULO SECCIÓN -->
+    <span>{{ seccion }}</span>
+
+    <span class="espaciador"></span>
+
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>share</mat-icon>
     </button>

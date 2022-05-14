@@ -19,6 +19,7 @@ public class Revision {
     private Articulo articulo;
 
     @NotNull
+    @Temporal(TemporalType.DATE)
     private Date fecha_revision;
 
     public Revision(Articulo id_articulo, Date fecha_revision) {

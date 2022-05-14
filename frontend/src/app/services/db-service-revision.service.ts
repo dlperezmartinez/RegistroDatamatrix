@@ -13,9 +13,10 @@ export class DbServiceRevisionService {
 
   constructor( private http: HttpClient ) { }
 
-  // consultar ( opcion: string, articulo: Articulo ): Observable<Date[]> {
-  //   return this.http.get<Date[]>( this.rootUrl + "consultar?opcion=" + opcion, {body: articulo} );
-  // }
+  consultar ( opcion: string, articulo: Articulo[] ): Observable<Date[]> {
+    return this.http.post<Date[]>( this.rootUrl + "consultar?opcion=" + opcion, articulo );
+  }
+
 
   insertar ( articulo: Articulo ): Observable<Revision[]> {
     return this.http.post<Revision[]>( this.rootUrl + "insertar", articulo );

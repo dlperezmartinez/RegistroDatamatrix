@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,9 +57,14 @@ public class DBService {
         return revisionRepository.findRevisionesByArticulo(idArticulo).orElseThrow(() -> new ArticuloNoEncontradoExcepcion("No hay revisiones"));
     }
 
-    public Date consultarUltimaRevisionPorArticulo(Articulo articulo) {
-        Long idArticulo = articulo.getId(); //TODO: Preguntar si esto es correcto.
-        return revisionRepository.findLastRevisionByArticulo(idArticulo).orElseThrow(() -> new ArticuloNoEncontradoExcepcion("No hay revisiones"));
+    public List<Date> consultarUltimaRevisionPorArticulo(List<Articulo> articulos) {
+        List<Date> resultadoFechas = new ArrayList<>();
+        for (Articulo articulo : articulos) {
+
+            Long idArticulo = articulo.getId(); //TODO: Preguntar si esto es correcto.
+            resultadoFechas.add(revisionRepository.findLastRevisionByArticulo(idArticulo));
+        }
+        return resultadoFechas;
     }
 
     public Revision insertarRevision(Revision revision) {
