@@ -16,10 +16,10 @@ public class DataMatrix {
     int ancho = 20;
     int alto  = 20;
 
-    public void generarDataMatrixImagen(int id) throws IOException {
+    public void generarDataMatrixImagen(Long id) throws IOException {
         DataMatrixWriter dataMatrixWriter = new DataMatrixWriter();
 
-        BitMatrix bitMatrix = dataMatrixWriter.encode(String.valueOf(id), BarcodeFormat.DATA_MATRIX, ancho, alto); //TODO cambiar hardcodes
+        BitMatrix bitMatrix = dataMatrixWriter.encode(String.valueOf(id), BarcodeFormat.DATA_MATRIX, ancho, alto);
 
         BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
 

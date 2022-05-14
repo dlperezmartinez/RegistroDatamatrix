@@ -10,8 +10,8 @@ import { DbServiceRevisionService } from 'src/app/services/db-service-revision.s
   templateUrl: './tabla.component.html',
   styles: [`
     mat-selection-list {
-      /* max-height: 750px;
-      overflow: auto; */
+      max-height: 750px;
+      overflow: auto;
     }
     .lista {
     }

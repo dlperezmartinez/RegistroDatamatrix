@@ -2,12 +2,14 @@ package com.registrodatamatrix.backend.controlador;
 
 import com.registrodatamatrix.backend.basedatos.Tablas.Articulo;
 import com.registrodatamatrix.backend.basedatos.Tablas.Revision;
+import com.registrodatamatrix.backend.datamatrix.DataMatrix;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.registrodatamatrix.backend.services.DBService;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -16,6 +18,7 @@ import java.util.List;
 public class ControladorArticulos {
 
     private final DBService dbService;
+    private DataMatrix dataMatrix = new DataMatrix();
 
     public ControladorArticulos(DBService dbService) {
         this.dbService = dbService;
@@ -44,10 +47,13 @@ public class ControladorArticulos {
     }
 
     @PostMapping("insertar")
-    public ResponseEntity<Articulo> insertar(@RequestBody Articulo articulo) {
+    public ResponseEntity<Articulo> insertar(@RequestBody Articulo articulo) throws IOException {
 
         // Se hace la petición al servicio.
         Articulo respuestaArticulo = dbService.insertarArticulo(articulo);
+
+        // Una vez hecho el insert se llama al método encargado de crear la imagen DataMatrix.
+        dataMatrix.generarDataMatrixImagen(respuestaArticulo.getId());
 
         // Se envía la respuesta.
         return new ResponseEntity<>(respuestaArticulo, HttpStatus.CREATED);

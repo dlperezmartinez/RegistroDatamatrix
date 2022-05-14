@@ -37,14 +37,15 @@ public class ControladorRevisiones {
 
     //TODO: Mirar lo de ResponseEntity<List<Revision>> (Quizás no haga falta devolver listas siempre).
     @PostMapping("insertar")
-    public ResponseEntity<Revision> insertar(Date fecha, @RequestBody Articulo articulo) {
+    public ResponseEntity<Revision> insertar(Long fecha, @RequestBody Articulo articulo) {
         // Se extrae el id del Articulo que llega.
         Long idArticulo = articulo.getId();
+        Date nuevaFecha = new Date(fecha);
 
         // Se crea una nueva Revision y se le setean los campos.
         Revision nuevarevision = new Revision();
         nuevarevision.setArticulo(articulo);
-        nuevarevision.setFecha_revision(fecha);
+        nuevarevision.setFecha_revision(nuevaFecha);
 
         Revision respuestaRevision = dbService.insertarRevision(nuevarevision);
         return new ResponseEntity<>(respuestaRevision, HttpStatus.CREATED);

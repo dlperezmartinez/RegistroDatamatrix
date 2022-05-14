@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { delay } from 'rxjs';
 import { Articulo } from 'src/app/db/articulo';
 import { Revision } from 'src/app/db/revision';
 import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.service';
@@ -55,8 +56,11 @@ export class NuevoArticuloComponent implements OnInit {
     this.dbServiceArticulo.insertar( this.articulo )
       .subscribe((res: Articulo) => {
         if ( this.formulario.value.fecha != '' ) {
-          this.dbServiceRevision.insertar( res, this.formulario.value.fecha );
+          this.dbServiceRevision.insertar( res, this.formulario.value.fecha )
+            .subscribe();
         }
+
+      // delay(1);
 
       this.limpiarFormulario();
       });

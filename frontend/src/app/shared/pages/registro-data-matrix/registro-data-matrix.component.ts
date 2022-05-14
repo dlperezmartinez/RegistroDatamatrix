@@ -6,7 +6,7 @@ import { DatosCompartidosService } from 'src/app/services/datos-compartidos.serv
   templateUrl: './registro-data-matrix.component.html',
   styles: [`
   .container {
-    display: grid;
+    overflow: auto;
   }
   `
   ]

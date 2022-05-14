@@ -16,9 +16,7 @@ public class TestBaseDatos {
 
     @Test
     public void test() throws IOException, SQLException {
-        //TEST DATAMATRIX
-//        DataMatrix dataMatrix = new DataMatrix();
-//        dataMatrix.generarDataMatrixImagen(1);
+
 
 
 
