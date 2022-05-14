@@ -17,9 +17,9 @@ export class DbServiceRevisionService {
     return this.http.post<Date[]>( this.rootUrl + "consultar?opcion=" + opcion, articulo );
   }
 
-
-  insertar ( articulo: Articulo ): Observable<Revision[]> {
-    return this.http.post<Revision[]>( this.rootUrl + "insertar", articulo );
+  insertar ( articulo: Articulo, fecha: Date ): Observable<Revision> {
+    let nuevaFecha = fecha.getDate() + "/" + fecha.getMonth() + "/" + fecha.getFullYear();
+    return this.http.post<Revision>( this.rootUrl + "insertar?fecha=" + fecha, articulo );
   }  
 
   actualizar ( articulo: Revision ): Observable<Revision> {

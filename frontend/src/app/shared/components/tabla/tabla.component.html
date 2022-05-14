@@ -1,5 +1,5 @@
 <!-- TABLA -->
-<mat-selection-list #listaArticulos [multiple]="false">
+<mat-selection-list class="lista" #listaArticulos [multiple]="false">
 
     <!-- NOMBRE COLUMNAS -->
     <mat-list-option class="cabecera-lista">
@@ -26,10 +26,9 @@
     </mat-list-option>
 
     <!-- NUEVO ARTICULO -->
-            <app-nuevo-articulo class="nuevo-articulo" *ngIf="insertandoNuevo"></app-nuevo-articulo>
+            <app-nuevo-articulo (listarArticulos)="listarArticulos()" class="nuevo-articulo" *ngIf="insertandoNuevo"></app-nuevo-articulo>
 
 </mat-selection-list>
-
 <!-- BOTONES-PIE -->
 <mat-toolbar class="container botones-pie">
     <!-- ELIMINAR -->

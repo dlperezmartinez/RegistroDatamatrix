@@ -1,13 +1,12 @@
-<form [formGroup]="selectorFecha">
+<form (ngSubmit)="guardar()" [formGroup]="formulario">
 
-    <mat-list-item class="nuevo-articulo">
         <div class="nuevo-articulo" fxFlex="row">
 
             <!-- NOMBRE -->
             <div fxFlex="33%" class="mat-form-field"> 
                 <mat-form-field appearance="fill">
                     <mat-label>Nombre</mat-label>
-                    <input matInput formControlName="nombre">
+                    <input matInput formControlName="nombre" (keydown)="$event.stopPropagation()">
                 </mat-form-field>
             </div>
 
@@ -15,7 +14,7 @@
             <div fxFlex="33%"> 
                 <mat-form-field appearance="fill">
                     <mat-label>Modelo</mat-label>
-                    <input matInput formControlName="modelo">
+                    <input matInput formControlName="modelo" (keydown)="$event.stopPropagation()">
                 </mat-form-field>
             </div>
 
@@ -23,13 +22,24 @@
             <div fxFlex="33%"> 
                 <mat-form-field appearance="fill">
                     <mat-label>Nueva revisión</mat-label>
-                    <input matInput [matDatepicker]="picker" formControlName="fecha">
+                    <input matInput [matDatepicker]="picker" formControlName="fecha" (keydown)="$event.stopPropagation()">
                     <mat-hint>MM/DD/YYYY</mat-hint>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
             </div>
 
+            <!-- GUARDAR -->
+            <div> <!-- TODO: Baja prioridad: poner animaciones. -->
+                <button 
+                    class="guardar-check" 
+                    type="submit"
+                    mat-icon-button color="accent" 
+                    [disabled]="formulario.invalid"
+                    >
+                    <mat-icon>check</mat-icon>
+                </button>
+            </div>
+
         </div>
-    </mat-list-item>
 </form>

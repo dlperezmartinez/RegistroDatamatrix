@@ -1,16 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { DatosCompartidosService } from 'src/app/services/datos-compartidos.service';
 
 @Component({
   selector: 'app-registro-data-matrix',
   templateUrl: './registro-data-matrix.component.html',
-  styles: [
+  styles: [`
+  .container {
+    display: grid;
+  }
+  `
   ]
 })
 export class RegistroDataMatrixComponent implements OnInit {
 
-  constructor() { }
+  seccion: string = "Lista de Artículos"; // Variable para establecer el título de la sección en la toolbar.
+
+  constructor(
+    private datosCompartidos: DatosCompartidosService,
+  ) { }
 
   ngOnInit(): void {
+    this.datosCompartidos.setSeccion(this.seccion);
   }
-
 }

@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegistroDataMatrixComponent } from '../../pages/registro-data-matrix/registro-data-matrix.component';
+import { DatosCompartidosService } from 'src/app/services/datos-compartidos.service';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styles: [`
-    .titulo {
-      margin: 10px;
+    .titulo, .seccion {
+      margin-left: 15px;
     }
     .espaciador {
       flex: 1 1 auto;
@@ -18,15 +18,19 @@ import { RegistroDataMatrixComponent } from '../../pages/registro-data-matrix/re
 export class ToolbarComponent implements OnInit {
   // VARIABLES
   titulo : string = "REGISTRO DATAMATRIX";
-  seccion: string = "Sección por defecto";
+  seccion: string = "";
   
   @Input() set setSeccion( seccion: string ) { this.seccion = seccion } 
 
   // CONSTRUCTOR Y NGON's
-  constructor( public router: Router) { }
+  constructor( 
+    public router: Router,
+    private datosCompartidos: DatosCompartidosService,
+  ) { }
 
   ngOnInit(): void {
     console.log("Router url toolbar: ", this.router.url);
+    this.seccion = this.datosCompartidos.getSeccion();
   }
 
   // MÉTODOS

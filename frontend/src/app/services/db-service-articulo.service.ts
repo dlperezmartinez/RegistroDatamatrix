@@ -18,8 +18,8 @@ export class DbServiceServiceArticulo {
     return this.http.get<Articulo[]>( this.rootUrl + "consultar?opcion=" + opcion)
   }
 
-  insertar ( articulo: Articulo ): Observable<Articulo[]> {
-    return this.http.post<Articulo[]>( this.rootUrl + "insertar", articulo );
+  insertar ( articulo: Articulo ): Observable<Articulo> {
+    return this.http.post<Articulo>( this.rootUrl + "insertar", articulo );
   }  
   
   actualizar ( articulo: Articulo ): Observable<Articulo> {

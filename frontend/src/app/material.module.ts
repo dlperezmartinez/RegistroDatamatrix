@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 // fxFlex
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -28,6 +29,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatListModule,
     MatNativeDateModule,
     MatToolbarModule,
+    ScrollingModule,
 
     // fxFlex
     FlexLayoutModule,
@@ -42,6 +44,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatListModule,
     MatNativeDateModule,
     MatToolbarModule,
+    ScrollingModule,
 
     // fxFlex
     FlexLayoutModule,

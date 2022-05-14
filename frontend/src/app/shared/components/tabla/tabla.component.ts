@@ -4,10 +4,17 @@ import { Articulo } from 'src/app/db/articulo';
 import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.service';
 import { DbServiceRevisionService } from 'src/app/services/db-service-revision.service';
 
+//TODO: max-height: 750px; hacer esto responsive
 @Component({
   selector: 'app-tabla',
   templateUrl: './tabla.component.html',
   styles: [`
+    mat-selection-list {
+      /* max-height: 750px;
+      overflow: auto; */
+    }
+    .lista {
+    }
     .cabecera-lista {
       background: lightgrey;
       border-radius: 10px 10px 0 0;
@@ -67,6 +74,8 @@ export class TablaComponent implements OnInit {
 
   // Hace una petición al back para listar los Articulos de la base de datos.
   listarArticulos() {
+    if ( this.insertandoNuevo ) this.nuevoArticulo(); //TODO: Mirar si esto es una locura.
+
     // Primero se hace petición de los Articulos...
     this.dbServiceArticulo.consultar("todo")
       .subscribe((res: Articulo[]) => {

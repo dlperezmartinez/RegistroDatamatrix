@@ -5,5 +5,15 @@ import { Injectable } from '@angular/core';
 })
 export class DatosCompartidosService {
 
+  seccion: string = "Sección por defecto";
+
   constructor() { }
+
+  setSeccion( nuevaSeccion: string ) {
+    this.seccion = nuevaSeccion;
+  }
+
+  getSeccion() : string{
+    return this.seccion;
+  }
 }

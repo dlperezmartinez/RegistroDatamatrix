@@ -44,10 +44,10 @@ public class ControladorArticulos {
     }
 
     @PostMapping("insertar")
-    public ResponseEntity<List<Articulo>> insertar(@RequestBody Articulo articulo) {
+    public ResponseEntity<Articulo> insertar(@RequestBody Articulo articulo) {
 
         // Se hace la petición al servicio.
-        List<Articulo> respuestaArticulo = List.of(dbService.insertarArticulo(articulo));
+        Articulo respuestaArticulo = dbService.insertarArticulo(articulo);
 
         // Se envía la respuesta.
         return new ResponseEntity<>(respuestaArticulo, HttpStatus.CREATED);
