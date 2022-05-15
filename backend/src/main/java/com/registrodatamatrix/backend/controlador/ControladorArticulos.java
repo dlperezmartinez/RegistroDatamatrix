@@ -65,11 +65,11 @@ public class ControladorArticulos {
         return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
 
-    @DeleteMapping("eliminar")
-    public ResponseEntity<?> eliminar(Long id) {
+    @PostMapping("eliminar")
+    public ResponseEntity<?> eliminar(@RequestBody Articulo articulo) {
 
         // Se hace la petición al servicio.
-        dbService.eliminarArticulo(id);
+        dbService.eliminarArticulo(articulo);
 
         // Se envía la respuesta.
         return new ResponseEntity<>(HttpStatus.OK);

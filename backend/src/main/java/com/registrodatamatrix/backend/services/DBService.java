@@ -46,8 +46,8 @@ public class DBService {
         return articuloRepository.save(articulo);
     }
 
-    public void eliminarArticulo(Long id) {
-        articuloRepository.deleteById(id);
+    public void eliminarArticulo(Articulo articulo) {
+        articuloRepository.delete(articulo);
     }
 
     // REVISIONES

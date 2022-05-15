@@ -14,8 +14,8 @@ public class Revision {
     private Long id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_articulo")
+    @ManyToOne()
+    @JoinColumn(name = "id_articulo")
     private Articulo articulo;
 
     @NotNull

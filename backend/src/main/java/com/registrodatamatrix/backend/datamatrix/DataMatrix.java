@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 
 //TODO: Mirar como hacer bien lo del output.
 //TODO: Quizás estaría bien que se le pudiera pasar una ruta de output.
@@ -34,5 +35,9 @@ public class DataMatrix {
 
     public void consultarArticuloConDataMatrix(ImageIO imagen) {
 //        ImageIO.read
+    }
+
+    public void imprimirDataMatrix() {
+//        PrintStream
     }
 }

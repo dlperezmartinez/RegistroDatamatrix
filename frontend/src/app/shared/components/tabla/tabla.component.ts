@@ -112,7 +112,7 @@ export class TablaComponent implements OnInit {
 
   // Elimina el Articulo seleccionado en la lista.
   eliminarArticulo( ) {
-    this.dbServiceArticulo.eliminar( this.articuloSeleccionado.id )
+    this.dbServiceArticulo.eliminar( this.articuloSeleccionado )
       .subscribe(res => {
         console.log(res) //TODO: Me gustaría controlar si se ha eliminado correctamente.
         // Se vuelve a hacer la petición al back para listar los Articulos.

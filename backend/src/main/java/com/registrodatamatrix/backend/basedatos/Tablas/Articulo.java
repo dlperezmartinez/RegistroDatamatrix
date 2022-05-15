@@ -1,8 +1,11 @@
 package com.registrodatamatrix.backend.basedatos.Tablas;
 
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "articulo")
@@ -15,6 +18,10 @@ public class Articulo {
     @NotNull
     private String nombre;
     private String modelo;
+
+    @OneToMany(mappedBy = "articulo", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Revision> revisiones;
 
     public Articulo(String nombre, String modelo) {
         this.nombre = nombre;

@@ -30,8 +30,8 @@ export class DbServiceServiceArticulo {
     return this.httpClient.put<Articulo>( this.rootUrl + "actualizar", articulo );
   }
 
-  eliminar ( id: number ): Observable<void> {
-    return this.httpClient.delete<void>( this.rootUrl + "eliminar?id=" + id );
+  eliminar ( articulo: Articulo ): Observable<void> {
+    return this.httpClient.post<void>( this.rootUrl + "eliminar", articulo );
   }
 }
 
