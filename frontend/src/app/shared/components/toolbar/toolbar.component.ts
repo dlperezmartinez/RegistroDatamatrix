@@ -22,7 +22,11 @@ export class ToolbarComponent implements OnInit {
   
   @Input() set setSeccion( seccion: string ) { this.seccion = seccion } 
 
+  @Input() visualizandoArticulo: boolean = false;
+
   @Output() toggleSideNav = new EventEmitter<void>();
+
+  @Output() vistaArticuloToggle = new EventEmitter<boolean>();
 
   // CONSTRUCTOR Y NGON's
   constructor( 
@@ -37,10 +41,6 @@ export class ToolbarComponent implements OnInit {
 
   // MÉTODOS
   volver() {
-    this.router.navigate(['registro-datamatrix'])
+    this.vistaArticuloToggle.emit(false);
   }
-
-  // toggleSideNav() {
-  //   this.datosCompartidos.toggleSideNavDisparador("");
-  // }
 }

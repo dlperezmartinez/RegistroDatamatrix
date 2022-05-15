@@ -1,4 +1,6 @@
 <mat-toolbar>
+
+  <!-- FILA UNO -->
   <mat-toolbar-row>
 
     <!-- BURGER MENU -->
@@ -11,13 +13,13 @@
 
   </mat-toolbar-row>
   
-  <!-- SECCIÓN -->
+  <!-- FILA DOS -->
   <mat-toolbar-row>
 
     <!-- VOLVER -->
     <button 
       mat-icon-button 
-      *ngIf="router.url !== '/registro-datamatrix'"
+      *ngIf="visualizandoArticulo"
       (click)="volver()"
       >
       <mat-icon>arrow_back</mat-icon>
@@ -28,9 +30,19 @@
 
     <span class="espaciador"></span>
 
-    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button> -->
+    <!-- EDITAR Y AÑADIR -->
+    <button 
+      *ngIf="!visualizandoArticulo"
+      mat-icon-button 
+      (click)="vistaArticuloToggle.emit(true)"
+      ><mat-icon>edit</mat-icon></button>
+
+    <button 
+      *ngIf="!visualizandoArticulo"
+      mat-icon-button 
+      (click)="vistaArticuloToggle.emit(false)"
+      ><mat-icon>add</mat-icon></button>
 
   </mat-toolbar-row>
+
 </mat-toolbar>

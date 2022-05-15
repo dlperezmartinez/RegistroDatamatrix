@@ -43,6 +43,9 @@ export class PagePrincipalComponent implements OnInit {
   // Para lista articulos.
   public articulos        : Articulo[] = [];
   articuloSeleccionado    : Articulo   = new Articulo();
+
+  // Para vista articulo.
+  visualizandoArticulo    : boolean    = false;
   
   // Para bottom toolbar.
   public botonNuevo       : string     = "Nuevo";
@@ -97,8 +100,8 @@ export class PagePrincipalComponent implements OnInit {
     this.articuloSeleccionado = articulo;    
   }
 
-  vistaArticulo() {
-    this.router.navigate(['vista-articulo'])
+  vistaArticuloToggle( editar?: boolean ) {
+    this.visualizandoArticulo = !this.visualizandoArticulo;
   }
 
   // Para bottom toolbar..................................

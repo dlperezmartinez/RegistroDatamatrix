@@ -21,27 +21,49 @@
 
 <!------------------------------------------------ PAGINA PRINCIPAL ------------------------------------------------>
 <div class="container" fxLayout.gt-sm="column" fxLayout.lt-md="column">
+
+    <!-- TOOLBAR -->
     <div fxFlex="130px" class="container toolbar">
+
         <app-toolbar
             (toggleSideNav)="toggleSideNav()"
+            (vistaArticuloToggle)="vistaArticuloToggle($event)"
+            [visualizandoArticulo]="visualizandoArticulo"
             ></app-toolbar>
+
     </div>
+
+    <!-- CONTENEDOR MEDIO -->
     <div fxFlex="auto" class="container component">
+        
+        <!-- LISTA ARTÍCULOS -->
         <app-lista-articulos
+            *ngIf="!visualizandoArticulo"
             [articulos]="articulos"
             [ultimasRevisiones]="ultimasRevisiones"
-            (vistaArticulo)="vistaArticulo()"
+            (vistaArticulo)="vistaArticuloToggle()"
             (elementoSeleccionado)="elementoSeleccionado($event)"
             ></app-lista-articulos>
+
+            <!-- VISTA ARTÍCULO -->
+            <app-vista-articulo
+                *ngIf="visualizandoArticulo"
+                ></app-vista-articulo>
+
     </div>
+
+    <!-- BOTTOM TOOLBAR -->
     <div fxFlex="65px" class="container footer">
+
         <app-bottom-toolbar 
             [insertandoNuevo]="insertandoNuevo" 
             [articuloSeleccionado]="articuloSeleccionado"
             [botonNuevo]="botonNuevo"
             (eliminarArticuloDialog)="eliminarArticuloDialog()"
             ></app-bottom-toolbar>
+
     </div>
+
 </div>
 
 </mat-drawer-container>
