@@ -33,8 +33,9 @@
 <mat-toolbar class="container botones-pie">
     <!-- ELIMINAR -->
     <button mat-raised-button color="warn" 
+        matTooltip="Eliminar artículo seleccionado"
         [disabled]="!articuloSeleccionado.id"
-        (click)="eliminarArticulo()"
+        (click)="eliminarArticuloDialog()"
         >Eliminar</button>
 
     <span class="espaciador"></span>
@@ -46,6 +47,7 @@
 
     <!-- NUEVO ARTICULO -->
     <button mat-raised-button 
+        matTooltip="Registrar nuevo artículo"
         [ngClass]="{'nuevo' : !insertandoNuevo, 'cancelarNuevo': insertandoNuevo}"
         (click)="nuevoArticulo()"
         >{{ botonNuevo }}</button>

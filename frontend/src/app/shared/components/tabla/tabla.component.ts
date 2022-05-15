@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Articulo } from 'src/app/db/articulo';
 import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.service';
 import { DbServiceRevisionService } from 'src/app/services/db-service-revision.service';
+import { DialogEliminarComponent } from '../dialogs/dialog-eliminar/dialog-eliminar.component';
 
 //TODO: max-height: 750px; hacer esto responsive
 @Component({
@@ -65,6 +67,7 @@ export class TablaComponent implements OnInit {
   constructor( 
     private dbServiceArticulo: DbServiceServiceArticulo,
     private dbServiceRevision: DbServiceRevisionService,
+    public dialog: MatDialog,
     private router: Router,
     ) { }
 
@@ -106,16 +109,25 @@ export class TablaComponent implements OnInit {
   nuevoArticulo() {
     this.insertandoNuevo = !this.insertandoNuevo;
     this.botonNuevo = this.insertandoNuevo ? "Cancelar" : "Nuevo";
-
-    // this.dbServiceArticulo.insertar( this.)
   }
 
+  // Abre un Dialog para confirmar la eliminación del artículo y se queda esperando la respuesta.
+  eliminarArticuloDialog() {
+    this.dialog.open(DialogEliminarComponent, {
+      data: { nombre: this.articuloSeleccionado.nombre }})
+      .afterClosed().subscribe(confirmacion => {
+        if(confirmacion) this.eliminarArticulo();
+    });
+  }
+  
   // Elimina el Articulo seleccionado en la lista.
   eliminarArticulo( ) {
     this.dbServiceArticulo.eliminar( this.articuloSeleccionado )
       .subscribe(res => {
         console.log(res) //TODO: Me gustaría controlar si se ha eliminado correctamente.
-        // Se vuelve a hacer la petición al back para listar los Articulos.
+
+        // Se vuelve a hacer la petición al back para listar los Articulos y se limpia de la memoria el articulo eliminado.
+        this.articuloSeleccionado = new Articulo();
         this.listarArticulos();
       });
   }

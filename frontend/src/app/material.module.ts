@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 // Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -12,6 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
 // fxFlex
@@ -25,6 +27,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     // Material
     MatButtonModule,
     MatDatepickerModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -33,6 +36,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatNativeDateModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatTooltipModule,
     ScrollingModule,
 
     // fxFlex
@@ -42,6 +46,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     // Material
     MatButtonModule,
     MatDatepickerModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -50,6 +55,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatNativeDateModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatTooltipModule,
     ScrollingModule,
 
     // fxFlex

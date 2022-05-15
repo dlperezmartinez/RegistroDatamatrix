@@ -14,6 +14,7 @@ import { VistaArticuloComponent } from './pages/vista-articulo/vista-articulo.co
 // Scanner DataMatrix
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ScannerComponent } from './pages/scanner/scanner.component';
+import { DialogEliminarComponent } from './components/dialogs/dialog-eliminar/dialog-eliminar.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ScannerComponent } from './pages/scanner/scanner.component';
     NuevoArticuloComponent,
     VistaArticuloComponent,
     ScannerComponent,
+    DialogEliminarComponent,
   ],
   imports: [
     CommonModule,
