@@ -2,7 +2,7 @@
   <mat-toolbar-row>
 
     <!-- BURGER MENU -->
-    <button mat-icon-button (click)="toggleSideNav()">
+    <button mat-icon-button (click)="toggleSideNav.emit()">
       <mat-icon>menu</mat-icon>
     </button>
     
@@ -28,9 +28,9 @@
 
     <span class="espaciador"></span>
 
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>share</mat-icon>
-    </button>
+    </button> -->
 
   </mat-toolbar-row>
 </mat-toolbar>

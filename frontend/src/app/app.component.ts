@@ -11,24 +11,5 @@ import { DatosCompartidosService } from './services/datos-compartidos.service';
 export class AppComponent {
   title = 'frontend';
 
-  sideNav = false;
-  
-  @ViewChild('drawer') drawer!: MatSidenav;
-
-  constructor(
-    private router: Router,
-    private datosCompartidos: DatosCompartidosService,
-  ) {
-    datosCompartidos.changeEmitted$.subscribe(text => this.toggleSideNav()
-    )
-  }
-
-  toggleSideNav () {
-    this.sideNav = !this.sideNav;
-    this.drawer.toggle();
-  }
-
-  navegar( ruta: string ) {
-    this.router.navigate([ruta]);
-  }
+  constructor( ) { }
 }

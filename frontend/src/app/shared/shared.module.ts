@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { TablaComponent } from './components/tabla/tabla.component';
@@ -15,6 +16,9 @@ import { VistaArticuloComponent } from './pages/vista-articulo/vista-articulo.co
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { ScannerComponent } from './pages/scanner/scanner.component';
 import { DialogEliminarComponent } from './components/dialogs/dialog-eliminar/dialog-eliminar.component';
+import { PagePrincipalComponent } from './pages/page-principal/page-principal.component';
+import { BottomToolbarComponent } from './components/bottom-toolbar/bottom-toolbar.component';
+import { ListaArticulosComponent } from './components/lista-articulos/lista-articulos.component';
 
 @NgModule({
   declarations: [
@@ -25,9 +29,13 @@ import { DialogEliminarComponent } from './components/dialogs/dialog-eliminar/di
     VistaArticuloComponent,
     ScannerComponent,
     DialogEliminarComponent,
+    PagePrincipalComponent,
+    BottomToolbarComponent,
+    ListaArticulosComponent,
   ],
   imports: [
     CommonModule,
+    FlexLayoutModule,
     SharedRoutingModule,
     MaterialModule,
     PipesModule,

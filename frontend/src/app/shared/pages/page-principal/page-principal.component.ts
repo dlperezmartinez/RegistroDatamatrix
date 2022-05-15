@@ -1,79 +1,74 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Articulo } from 'src/app/db/articulo';
 import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.service';
 import { DbServiceRevisionService } from 'src/app/services/db-service-revision.service';
-import { DialogEliminarComponent } from '../dialogs/dialog-eliminar/dialog-eliminar.component';
+import { DialogEliminarComponent } from '../../components/dialogs/dialog-eliminar/dialog-eliminar.component';
 
-//TODO: max-height: 750px; hacer esto responsive
 @Component({
-  selector: 'app-tabla',
-  templateUrl: './tabla.component.html',
+  selector: 'app-page-principal',
+  templateUrl: './page-principal.component.html',
   styles: [`
-    mat-selection-list {
-      /* max-height: 750px;
-      overflow: auto; */
-    }
-    .lista {
-    }
-    .cabecera-lista {
-      background: lightgrey;
-      border-radius: 10px 10px 0 0;
-
-      text-align: center;
-      color: black;
-    }
-    .elementos-lista {
-      text-align: center;
-    }
-    .nuevo-articulo {
-      margin: 50px;
-    }
-    .botones-pie {
-      position: fixed;
-      bottom: 0;
-      
-      height: 60px;
+    .container {
       width: 100%;
+      height: 100%;
     }
-    .espaciador {
-      flex: 1 1 auto;
+    .toolbar, .footer {
+       
     }
-    button {
-      margin: 8px;
+    .toolbar {
     }
-    .nuevo {
-      background: #69f0ae;
+    .component {
+      overflow: auto;
     }
-    .cancelarNuevo {
-      background: #f44336;
+    .footer {
+      width: 100%;
     }
   `
   ]
 })
-export class TablaComponent implements OnInit {
-
+export class PagePrincipalComponent implements OnInit {
+  
   /* VARIABLES */
-  public articulos        : Articulo[] = [];
+
+  // Para sidenav.
+  @ViewChild('drawer') drawer!: MatSidenav;
+
+  //.....................
   public ultimasRevisiones: Date    [] = [];
   public keysArticulos    : string  [] = [];
-
-  public insertandoNuevo  : boolean    = false;
+  
+  // Para lista articulos.
+  public articulos        : Articulo[] = [];
+  articuloSeleccionado    : Articulo   = new Articulo();
+  
+  // Para bottom toolbar.
   public botonNuevo       : string     = "Nuevo";
+  public insertandoNuevo  : boolean    = false;
 
-  articuloSeleccionado: Articulo = new Articulo();
-
-  constructor( 
+  constructor(
     private dbServiceArticulo: DbServiceServiceArticulo,
     private dbServiceRevision: DbServiceRevisionService,
     public dialog: MatDialog,
     private router: Router,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.listarArticulos();
   }
+
+  /* MÉTODOS */
+  // Para sidenav.......................................
+  toggleSideNav () {
+    this.drawer.toggle();
+  }
+
+  navegar( ruta: string ) {
+    this.router.navigate([ruta]);
+  }
+  //.................................................
 
   // Hace una petición al back para listar los Articulos de la base de datos.
   listarArticulos() {
@@ -94,6 +89,7 @@ export class TablaComponent implements OnInit {
       });
   }
 
+  // Para lista articulo..................................
   // Carga en memoria el Articulo seleccionado en la lista.
   elementoSeleccionado( articulo: Articulo ) {
     console.log("Articulo seleccionado: ", articulo);
@@ -105,6 +101,7 @@ export class TablaComponent implements OnInit {
     this.router.navigate(['vista-articulo'])
   }
 
+  // Para bottom toolbar..................................
   // Navega a la pantalla de nuevo Articulo.
   nuevoArticulo() {
     this.insertandoNuevo = !this.insertandoNuevo;

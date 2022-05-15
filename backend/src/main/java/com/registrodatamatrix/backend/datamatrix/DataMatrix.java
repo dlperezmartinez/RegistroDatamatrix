@@ -16,7 +16,7 @@ import java.io.PrintStream;
 public class DataMatrix {
 
     // Output de la imagen.
-    String outputPath = "D:\\Documentos\\_ProyectoDAM\\RegistroDatamatrix\\backend\\src\\test\\java\\com\\registrodatamatrix\\backend\\imageOutput\\";
+    String outputPath = "D:\\Documentos\\_ProyectoDAM\\RegistroDatamatrix\\DataMatrixOutput\\";
 
     // Dimensiones de la imagen.
     int ancho = 144;

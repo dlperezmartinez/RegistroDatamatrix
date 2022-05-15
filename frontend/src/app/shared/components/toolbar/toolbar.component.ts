@@ -22,6 +22,8 @@ export class ToolbarComponent implements OnInit {
   
   @Input() set setSeccion( seccion: string ) { this.seccion = seccion } 
 
+  @Output() toggleSideNav = new EventEmitter<void>();
+
   // CONSTRUCTOR Y NGON's
   constructor( 
     public router: Router,
@@ -38,8 +40,7 @@ export class ToolbarComponent implements OnInit {
     this.router.navigate(['registro-datamatrix'])
   }
 
-  toggleSideNav() {
-    this.datosCompartidos.toggleSideNavDisparador("");
-    // this.router.navigate([])
-  }
+  // toggleSideNav() {
+  //   this.datosCompartidos.toggleSideNavDisparador("");
+  // }
 }

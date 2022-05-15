@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -26,6 +29,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 
     // Material
     MatButtonModule,
+    MatCardModule,
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -34,6 +38,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatListModule,
     MatMenuModule,
     MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
     MatSidenavModule,
     MatToolbarModule,
     MatTooltipModule,
@@ -45,6 +51,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
   exports: [
     // Material
     MatButtonModule,
+    MatCardModule,
     MatDatepickerModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -53,6 +60,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatListModule,
     MatMenuModule,
     MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
     MatSidenavModule,
     MatToolbarModule,
     MatTooltipModule,

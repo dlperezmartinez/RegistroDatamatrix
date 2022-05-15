@@ -1,0 +1,47 @@
+<!------------------------------------------------ SIDENAV ------------------------------------------------>
+<mat-drawer-container class="container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="over">
+
+        <mat-nav-list>
+            <button 
+                mat-list-item 
+                (click)="navegar('page-principal')"
+                >
+                <mat-icon>format_list_bulleted</mat-icon>Lista Articulos
+            </button>
+            <button 
+                mat-list-item 
+                (click)="navegar('scanner')"
+                >
+                <mat-icon>crop_free</mat-icon>Scanner DataMatrix
+            </button>
+        </mat-nav-list>
+
+    </mat-drawer>
+
+<!------------------------------------------------ PAGINA PRINCIPAL ------------------------------------------------>
+<div class="container" fxLayout.gt-sm="column" fxLayout.lt-md="column">
+    <div fxFlex="130px" class="container toolbar">
+        <app-toolbar
+            (toggleSideNav)="toggleSideNav()"
+            ></app-toolbar>
+    </div>
+    <div fxFlex="auto" class="container component">
+        <app-lista-articulos
+            [articulos]="articulos"
+            [ultimasRevisiones]="ultimasRevisiones"
+            (vistaArticulo)="vistaArticulo()"
+            (elementoSeleccionado)="elementoSeleccionado($event)"
+            ></app-lista-articulos>
+    </div>
+    <div fxFlex="65px" class="container footer">
+        <app-bottom-toolbar 
+            [insertandoNuevo]="insertandoNuevo" 
+            [articuloSeleccionado]="articuloSeleccionado"
+            [botonNuevo]="botonNuevo"
+            (eliminarArticuloDialog)="eliminarArticuloDialog()"
+            ></app-bottom-toolbar>
+    </div>
+</div>
+
+</mat-drawer-container>

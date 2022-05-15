@@ -1,5 +1,4 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
-import { Subject } from 'rxjs/internal/Subject';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +6,6 @@ import { Subject } from 'rxjs/internal/Subject';
 export class DatosCompartidosService {
 
   seccion: string = "Sección por defecto";
-
-    // Necesario para envíar la instrucción de abrir/cerrar el sidenav.
-    private emitirToggle = new Subject<any>();
-    changeEmitted$ = this.emitirToggle.asObservable();
-
 
   constructor() { }
 
@@ -21,10 +15,5 @@ export class DatosCompartidosService {
 
   getSeccion() : string{
     return this.seccion;
-  }
-
-  // Dispara el toggle del sidenav.
-  toggleSideNavDisparador(change: any) {
-    this.emitirToggle.next(change);
   }
 }

@@ -4,7 +4,16 @@ import { DatosCompartidosService } from 'src/app/services/datos-compartidos.serv
 @Component({
   selector: 'app-vista-articulo',
   templateUrl: './vista-articulo.component.html',
-  styles: [
+  styles: [`
+  .example-card {
+  /* max-width: 400px; */
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+  `
   ]
 })
 export class VistaArticuloComponent implements OnInit {

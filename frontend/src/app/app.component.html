@@ -1,16 +1,1 @@
-
-<!-- SIDENAV -->
-<mat-drawer-container class="container" autosize>
-    <mat-drawer #drawer class="sidenav" mode="over">
-
-        <mat-nav-list>
-            <button mat-list-item (click)="navegar('registro-datamatrix')"
-                ><mat-icon>format_list_bulleted</mat-icon>Lista Articulos</button>
-            <button mat-list-item (click)="navegar('scanner')"
-                ><mat-icon>crop_free</mat-icon>Scanner DataMatrix</button>
-        </mat-nav-list>
-
-    </mat-drawer>
-  
-    <router-outlet></router-outlet>
-  </mat-drawer-container>
+<router-outlet></router-outlet>
