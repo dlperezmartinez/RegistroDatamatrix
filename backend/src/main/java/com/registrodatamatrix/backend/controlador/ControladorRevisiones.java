@@ -35,7 +35,6 @@ public class ControladorRevisiones {
         return null; //TODO CAMBIAR
     }
 
-    //TODO: Mirar lo de ResponseEntity<List<Revision>> (Quizás no haga falta devolver listas siempre).
     @PostMapping("insertar")
     public ResponseEntity<Revision> insertar(Long fecha, @RequestBody Articulo articulo) {
         // Se extrae el id del Articulo que llega.

@@ -8,7 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
@@ -27,7 +29,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatNativeDateModule,
+    MatSidenavModule,
     MatToolbarModule,
     ScrollingModule,
 
@@ -42,7 +46,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatNativeDateModule,
+    MatSidenavModule,
     MatToolbarModule,
     ScrollingModule,
 

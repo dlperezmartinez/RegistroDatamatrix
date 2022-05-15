@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Mis módulos
-import { DirectivesModule } from './directives/directives.module';
 import { MaterialModule } from './material.module';
 import { PipesModule } from './pipes/pipes.module';
 import { SharedModule } from './shared/shared.module';
@@ -32,13 +31,11 @@ import { DbServiceRevisionService } from './services/db-service-revision.service
     AppRoutingModule,
     
     //Mis módulos
-    DirectivesModule,
     MaterialModule,
     PipesModule,
     SharedModule,
   ],
   exports: [
-    DirectivesModule,
     MaterialModule,
   ],
   providers: [

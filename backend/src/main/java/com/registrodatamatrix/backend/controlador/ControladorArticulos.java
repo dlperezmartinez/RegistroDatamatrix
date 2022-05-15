@@ -53,7 +53,7 @@ public class ControladorArticulos {
         Articulo respuestaArticulo = dbService.insertarArticulo(articulo);
 
         // Una vez hecho el insert se llama al método encargado de crear la imagen DataMatrix.
-        dataMatrix.generarDataMatrixImagen(respuestaArticulo.getId());
+        dataMatrix.generarDataMatrixImagen(respuestaArticulo.getNombre(), respuestaArticulo.getId());
 
         // Se envía la respuesta.
         return new ResponseEntity<>(respuestaArticulo, HttpStatus.CREATED);

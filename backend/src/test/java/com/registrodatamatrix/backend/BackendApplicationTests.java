@@ -12,7 +12,7 @@ class BackendApplicationTests {
 	@Test
 	void testDataMatrix() throws IOException {
         DataMatrix dataMatrix = new DataMatrix();
-        dataMatrix.generarDataMatrixImagen(12L);
+        dataMatrix.generarDataMatrixImagen("nombre test", 12L);
 	}
 
 	@Test

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatosCompartidosService } from 'src/app/services/datos-compartidos.service';
 
@@ -36,5 +36,10 @@ export class ToolbarComponent implements OnInit {
   // MÉTODOS
   volver() {
     this.router.navigate(['registro-datamatrix'])
+  }
+
+  toggleSideNav() {
+    this.datosCompartidos.toggleSideNavDisparador("");
+    // this.router.navigate([])
   }
 }
