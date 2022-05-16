@@ -1,5 +1,6 @@
 export class Articulo {
-    id      : number = 0;
-    nombre  : string = "";
-    modelo  : string = "";
+    id           : number = 0;
+    nombre       : string = "";
+    modelo       : string = "";
+    descripcion  : string = "";
 }

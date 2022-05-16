@@ -41,11 +41,14 @@ export class PagePrincipalComponent implements OnInit {
   public keysArticulos    : string  [] = [];
   
   // Para lista articulos.
-  public articulos        : Articulo[] = [];
-  articuloSeleccionado    : Articulo   = new Articulo();
+  public articulos        : Articulo[] = []; // Aquí se carga en memoria la petición de articulos que se le hace al back.
+  articuloSeleccionado    : Articulo   = new Articulo(); // Aquí se carga en memoria el articulo seleccionado.
+  articuloSeleccionadoB   : boolean    = false;
+
 
   // Para vista articulo.
-  visualizandoArticulo    : boolean    = false;
+  visualizandoArticulo    : boolean    = false; // Mostrar la vista articulo o no.
+  editando                : boolean    = false; // Al cargar la vista artículo se le pasa este boolean para activar el modo edición con el articulo seleccionado.
   
   // Para bottom toolbar.
   public botonNuevo       : string     = "Nuevo";
@@ -59,7 +62,7 @@ export class PagePrincipalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listarArticulos();
+    this.resetLista();
   }
 
   /* MÉTODOS */
@@ -73,10 +76,16 @@ export class PagePrincipalComponent implements OnInit {
   }
   //.................................................
 
+  peticionArticulos() {
+
+  }
+
+  peticionUltimaRevision() {
+    
+  }
+
   // Hace una petición al back para listar los Articulos de la base de datos.
   listarArticulos() {
-    if ( this.insertandoNuevo ) this.nuevoArticulo(); //TODO: Mirar si esto es una locura.
-
     // Primero se hace petición de los Articulos...
     this.dbServiceArticulo.consultar("todo")
       .subscribe((res: Articulo[]) => {
@@ -95,18 +104,24 @@ export class PagePrincipalComponent implements OnInit {
   // Para lista articulo..................................
   // Carga en memoria el Articulo seleccionado en la lista.
   elementoSeleccionado( articulo: Articulo ) {
+    this.articuloSeleccionado  = articulo;    
+    this.articuloSeleccionadoB = true;
+
     console.log("Articulo seleccionado: ", articulo);
-    
-    this.articuloSeleccionado = articulo;    
   }
 
-  vistaArticuloToggle( editar?: boolean ) {
+  vistaArticuloToggle() {
     this.visualizandoArticulo = !this.visualizandoArticulo;
+    this.resetLista();
+  }
+
+  setEditando( editando: boolean ) {
+    this.editando = editando;
   }
 
   // Para bottom toolbar..................................
   // Navega a la pantalla de nuevo Articulo.
-  nuevoArticulo() {
+  nuevoArticulo() { //TODO QUITAR
     this.insertandoNuevo = !this.insertandoNuevo;
     this.botonNuevo = this.insertandoNuevo ? "Cancelar" : "Nuevo";
   }
@@ -127,8 +142,15 @@ export class PagePrincipalComponent implements OnInit {
         console.log(res) //TODO: Me gustaría controlar si se ha eliminado correctamente.
 
         // Se vuelve a hacer la petición al back para listar los Articulos y se limpia de la memoria el articulo eliminado.
-        this.articuloSeleccionado = new Articulo();
-        this.listarArticulos();
+        this.resetLista();
       });
+  }
+
+  resetLista() {
+    this.articuloSeleccionado  = new Articulo();
+    this.articuloSeleccionadoB = false;
+    this.listarArticulos();
+
+    console.log("Lista reseteada correctamente.");
   }
 }

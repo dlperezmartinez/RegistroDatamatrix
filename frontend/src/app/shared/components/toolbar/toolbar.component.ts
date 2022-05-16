@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Articulo } from 'src/app/db/articulo';
 import { DatosCompartidosService } from 'src/app/services/datos-compartidos.service';
 
 @Component({
@@ -22,11 +23,15 @@ export class ToolbarComponent implements OnInit {
   
   @Input() set setSeccion( seccion: string ) { this.seccion = seccion } 
 
-  @Input() visualizandoArticulo: boolean = false;
+  @Input() visualizandoArticulo : boolean = false;
 
-  @Output() toggleSideNav = new EventEmitter<void>();
+  @Input() articuloSeleccionadoB: boolean = false; // Por no crear más variables en el padre, envío aquí el artículo seleccionado.
 
-  @Output() vistaArticuloToggle = new EventEmitter<boolean>();
+  @Output() toggleSideNav       = new EventEmitter<void>();
+
+  @Output() vistaArticuloToggle = new EventEmitter<void>();
+
+  @Output() editando            = new EventEmitter<boolean>();
 
   // CONSTRUCTOR Y NGON's
   constructor( 
@@ -41,6 +46,6 @@ export class ToolbarComponent implements OnInit {
 
   // MÉTODOS
   volver() {
-    this.vistaArticuloToggle.emit(false);
+    this.vistaArticuloToggle.emit();
   }
 }

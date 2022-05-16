@@ -18,14 +18,16 @@ public class Articulo {
     @NotNull
     private String nombre;
     private String modelo;
+    private String descripcion;
 
     @OneToMany(mappedBy = "articulo", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Revision> revisiones;
 
-    public Articulo(String nombre, String modelo) {
+    public Articulo(String nombre, String modelo, String descripcion) {
         this.nombre = nombre;
         this.modelo = modelo;
+        this.descripcion = descripcion;
     }
 
     public Articulo() {
@@ -54,5 +56,21 @@ public class Articulo {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public List<Revision> getRevisiones() {
+        return revisiones;
+    }
+
+    public void setRevisiones(List<Revision> revisiones) {
+        this.revisiones = revisiones;
     }
 }

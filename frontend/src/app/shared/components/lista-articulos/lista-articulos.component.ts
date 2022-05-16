@@ -23,7 +23,7 @@ export class ListaArticulosComponent implements OnInit {
   @Input() articulos        : Articulo[] = [];
   @Input() ultimasRevisiones: Date    [] = [];
 
-  @Output() vistaArticulo = new EventEmitter<void>();
+  @Output() vistaArticulo        = new EventEmitter<boolean>();
   @Output() elementoSeleccionado = new EventEmitter<Articulo>();
 
   constructor() { }

@@ -27,8 +27,10 @@
 
         <app-toolbar
             (toggleSideNav)="toggleSideNav()"
-            (vistaArticuloToggle)="vistaArticuloToggle($event)"
+            (vistaArticuloToggle)="vistaArticuloToggle()"
+            (editando)="setEditando($event)"
             [visualizandoArticulo]="visualizandoArticulo"
+            [articuloSeleccionadoB]="articuloSeleccionadoB"
             ></app-toolbar>
 
     </div>
@@ -43,11 +45,13 @@
             [ultimasRevisiones]="ultimasRevisiones"
             (vistaArticulo)="vistaArticuloToggle()"
             (elementoSeleccionado)="elementoSeleccionado($event)"
-            ></app-lista-articulos>
+            ></app-lista-articulos> <!-- TODO: El error que sale por la consola apareció cuando hice el método reset lista y le puse el emit aquí-->
 
             <!-- VISTA ARTÍCULO -->
             <app-vista-articulo
                 *ngIf="visualizandoArticulo"
+                [articulo]="articuloSeleccionado"
+                [editando]="editando"
                 ></app-vista-articulo>
 
     </div>

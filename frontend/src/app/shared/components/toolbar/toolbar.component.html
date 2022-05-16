@@ -32,15 +32,16 @@
 
     <!-- EDITAR Y AÑADIR -->
     <button 
-      *ngIf="!visualizandoArticulo"
+      *ngIf="!visualizandoArticulo && articuloSeleccionadoB == true"
       mat-icon-button 
-      (click)="vistaArticuloToggle.emit(true)"
+      (click)="vistaArticuloToggle.emit()"
+      (click)="editando.emit(true)"
       ><mat-icon>edit</mat-icon></button>
 
     <button 
       *ngIf="!visualizandoArticulo"
       mat-icon-button 
-      (click)="vistaArticuloToggle.emit(false)"
+      (click)="vistaArticuloToggle.emit()"
       ><mat-icon>add</mat-icon></button>
 
   </mat-toolbar-row>
