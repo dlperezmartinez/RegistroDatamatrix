@@ -1,14 +1,13 @@
-<mat-card class="card-articulo">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>    {{ articulo.nombre }}</mat-card-title>
-    <mat-card-subtitle> {{ articulo.modelo }}</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image  [ngClass]=" vistaMovil ? 'imagen-movil' : 'imagen-escritorio'" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-  <mat-card-content>
-    <p>
-      {{ articulo.descripcion }}
-    </p>
-  </mat-card-content>
+<div class="container" fxLayout="row" fxLayoutAlign="center" >
 
-</mat-card>
+  <app-ver
+    *ngIf="visualizandoArticulo && !editando"
+    [articulo]="articulo"
+    [listaRevisiones]="listaRevisiones"
+    ></app-ver>
+
+    <app-nuevo
+      *ngIf="insertandoNuevo"
+      ></app-nuevo>
+
+</div>

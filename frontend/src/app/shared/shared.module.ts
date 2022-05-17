@@ -18,6 +18,9 @@ import { DialogEliminarComponent } from './components/dialogs/dialog-eliminar/di
 import { PagePrincipalComponent } from './pages/page-principal/page-principal.component';
 import { BottomToolbarComponent } from './components/bottom-toolbar/bottom-toolbar.component';
 import { ListaArticulosComponent } from './components/lista-articulos/lista-articulos.component';
+import { VerComponent } from './components/vista-articulo/ver/ver.component';
+import { EditarComponent } from './components/vista-articulo/editar/editar.component';
+import { NuevoComponent } from './components/vista-articulo/nuevo/nuevo.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { ListaArticulosComponent } from './components/lista-articulos/lista-arti
     PagePrincipalComponent,
     BottomToolbarComponent,
     ListaArticulosComponent,
+    VerComponent,
+    EditarComponent,
+    NuevoComponent,
   ],
   imports: [
     CommonModule,

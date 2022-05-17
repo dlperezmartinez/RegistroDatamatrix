@@ -12,10 +12,10 @@ import { Articulo } from 'src/app/db/articulo';
     button {
       margin: 8px;
     }
-    .nuevo {
+    .editar {
       background: #69f0ae;
     }
-    .cancelarNuevo {
+    .cancelar-edicion {
       background: #f44336;
     }
   `
@@ -23,20 +23,22 @@ import { Articulo } from 'src/app/db/articulo';
 })
 export class BottomToolbarComponent implements OnInit {
 
-  @Input() botonNuevo          : string   = "Nuevo"; //TODO: Esta variable puede que no tenga que ser un input.
-  @Input() insertandoNuevo     : boolean  = false;
-  @Input() articuloSeleccionado: Articulo = new Articulo(); //TODO: Probablemente solo necesite un boolean.
-
-  @Output() eliminarArticuloDialog = new EventEmitter<void>();
+  
+  @Input() botonVerArticulo     : string   = "Ver artículo"; //TODO: Esta variable puede que no tenga que ser un input.
+  @Input() editando             : boolean  = false;
+  @Input() insertandoNuevo      : boolean  = false;
+  @Input() visualizandoArticulo : boolean  = false;
+  @Input() articuloSeleccionadoB: boolean  = false;
+  @Input() articuloSeleccionado : Articulo = new Articulo(); //TODO: Probablemente solo necesite un boolean.
+  
+  @Output() eliminarArticuloDialog      = new EventEmitter<void>();
+  @Output() visualizandoArticuloEmitter = new EventEmitter<boolean>();
+  @Output() editandoEmitter             = new EventEmitter<boolean>();
+  
+  botonEditar         : string   = this.editando ? "Cancelar" : "Editar";; //TODO: Esta variable puede que no tenga que ser un input.
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  // Navega a la pantalla de nuevo Articulo.
-  nuevoArticulo() {
-    this.insertandoNuevo = !this.insertandoNuevo;
-    this.botonNuevo = this.insertandoNuevo ? "Cancelar" : "Nuevo";
   }
 }

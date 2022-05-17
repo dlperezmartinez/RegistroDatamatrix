@@ -21,15 +21,18 @@
 
 <!------------------------------------------------ PAGINA PRINCIPAL ------------------------------------------------>
 <div class="container" fxLayout.gt-sm="column" fxLayout.lt-md="column">
-
+    
     <!-- TOOLBAR -->
     <div fxFlex="130px" class="container toolbar">
 
         <app-toolbar
             (toggleSideNav)="toggleSideNav()"
-            (vistaArticuloToggle)="vistaArticuloToggle()"
-            (editando)="setEditando($event)"
+            (visualizandoArticuloEmitter)="setVisualizandoArticulo($event)"
+            (insertandoNuevoEmitter)="setInsertandoNuevo($event)"
+            (editandoEmitter)="setEditando($event)"
             [visualizandoArticulo]="visualizandoArticulo"
+            [editando]="editando"
+            [insertandoNuevo]="insertandoNuevo"
             [articuloSeleccionadoB]="articuloSeleccionadoB"
             ></app-toolbar>
 
@@ -40,17 +43,20 @@
         
         <!-- LISTA ARTÍCULOS -->
         <app-lista-articulos
-            *ngIf="!visualizandoArticulo"
+            *ngIf="!visualizandoArticulo && !editando && !insertandoNuevo"
             [articulos]="articulos"
             [ultimasRevisiones]="ultimasRevisiones"
-            (vistaArticulo)="vistaArticuloToggle()"
+            (visualizandoArticuloEmitter)="setVisualizandoArticulo($event)"
             (elementoSeleccionado)="elementoSeleccionado($event)"
+            (resetLista)="resetLista()"
             ></app-lista-articulos> <!-- TODO: El error que sale por la consola apareció cuando hice el método reset lista y le puse el emit aquí-->
 
             <!-- VISTA ARTÍCULO -->
             <app-vista-articulo
                 *ngIf="visualizandoArticulo"
                 [articulo]="articuloSeleccionado"
+                [visualizandoArticulo]="visualizandoArticulo"
+                [insertandoNuevo]="insertandoNuevo"
                 [editando]="editando"
                 ></app-vista-articulo>
 
@@ -62,8 +68,12 @@
         <app-bottom-toolbar 
             [insertandoNuevo]="insertandoNuevo" 
             [articuloSeleccionado]="articuloSeleccionado"
-            [botonNuevo]="botonNuevo"
+            [visualizandoArticulo]="visualizandoArticulo"
+            [articuloSeleccionadoB]="articuloSeleccionadoB"
+            [editando]="editando"
             (eliminarArticuloDialog)="eliminarArticuloDialog()"
+            (visualizandoArticuloEmitter)="setVisualizandoArticulo($event)"
+            (editandoEmitter)="setEditando($event)"
             ></app-bottom-toolbar>
 
     </div>

@@ -2,7 +2,7 @@
     <!-- ELIMINAR -->
     <button mat-raised-button color="warn" 
         matTooltip="Eliminar artículo seleccionado"
-        [disabled]="!articuloSeleccionado.id"
+        [disabled]="!articuloSeleccionadoB"
         (click)="this.eliminarArticuloDialog.emit()"
         >Eliminar</button>
 
@@ -10,13 +10,22 @@
 
     <!-- ETIQUETA CODIGO DATA MATRIX -->
     <button mat-raised-button color="primary"
-        [disabled]="!articuloSeleccionado.id"
+        [disabled]="!articuloSeleccionadoB"
         >Etiqueta Data Matrix</button>
 
-    <!-- NUEVO ARTICULO -->
+    <!-- VER ARTÍCULO -->
     <button mat-raised-button 
-        matTooltip="Registrar nuevo artículo"
-        [ngClass]="{'nuevo' : !insertandoNuevo, 'cancelarNuevo': insertandoNuevo}"
-        (click)="nuevoArticulo()"
-        >{{ botonNuevo }}</button>
+        matTooltip="Ver el artículo seleccionado"
+        color="primary"
+        *ngIf="!visualizandoArticulo"
+        [disabled]="!articuloSeleccionadoB"
+        (click)="visualizandoArticuloEmitter.emit(true)"
+        >{{ botonVerArticulo }}</button>
+
+    <button mat-raised-button 
+        matTooltip="Ver el artículo seleccionado"
+        *ngIf="editando || visualizandoArticulo"
+        [ngClass]="{'cancelar-edicion' : editando, 'editar': !editando}"
+        (click)="editandoEmitter.emit(true)"
+        >{{ botonEditar }}</button>
 </mat-toolbar>

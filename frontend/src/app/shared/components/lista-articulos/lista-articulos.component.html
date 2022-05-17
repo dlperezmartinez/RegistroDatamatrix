@@ -16,7 +16,7 @@
       *ngFor="let articulo of this.articulos; let i = index"
       [value]="articulo"
       (click)="elementoSeleccionado.emit(listaArticulos.selectedOptions.selected[0]?.value)"
-      (dblclick)="vistaArticulo.emit(true)"
+      (dblclick)="visualizandoArticuloEmitter.emit(true)"
       >
       <div class="elementos-lista" fxFlex="row">
           <div fxFlex="33%">{{ articulo.nombre      | titlecase    }}</div>

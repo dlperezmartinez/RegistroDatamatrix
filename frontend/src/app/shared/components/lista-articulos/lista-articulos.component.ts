@@ -23,11 +23,13 @@ export class ListaArticulosComponent implements OnInit {
   @Input() articulos        : Articulo[] = [];
   @Input() ultimasRevisiones: Date    [] = [];
 
-  @Output() vistaArticulo        = new EventEmitter<boolean>();
-  @Output() elementoSeleccionado = new EventEmitter<Articulo>();
+  @Output() visualizandoArticuloEmitter        = new EventEmitter<boolean>();
+  @Output() elementoSeleccionado               = new EventEmitter<Articulo>();
+  @Output() resetLista                         = new EventEmitter<void>();
 
   constructor() { }
 
   ngOnInit(): void {
+    this.resetLista.emit();
   }
 }

@@ -1,0 +1,27 @@
+<div>
+
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>{{ articulo.nombre }}</mat-card-title>
+        <mat-card-subtitle>{{ articulo.modelo }}</mat-card-subtitle>
+      </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+      <mat-card-content>
+        <p>
+          {{ articulo.descripcion }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Ver revisiones</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div>
+    <mat-list role="list">
+      <mat-list-item role="listitem">Revisiones realizadas:</mat-list-item>
+      <mat-list-item role="listitem" *ngFor="let revision of listaRevisiones">{{ revision }}</mat-list-item>
+    </mat-list>
+
+</div>

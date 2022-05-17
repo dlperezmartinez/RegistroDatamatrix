@@ -65,12 +65,4 @@ public class Articulo {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public List<Revision> getRevisiones() {
-        return revisiones;
-    }
-
-    public void setRevisiones(List<Revision> revisiones) {
-        this.revisiones = revisiones;
-    }
 }

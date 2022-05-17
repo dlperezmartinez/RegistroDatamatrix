@@ -49,9 +49,13 @@ export class PagePrincipalComponent implements OnInit {
   // Para vista articulo.
   visualizandoArticulo    : boolean    = false; // Mostrar la vista articulo o no.
   editando                : boolean    = false; // Al cargar la vista artículo se le pasa este boolean para activar el modo edición con el articulo seleccionado.
+  setVisualizandoArticulo ( visualizandoArticulo:boolean ) { this.visualizandoArticulo = visualizandoArticulo }
+  setEditando             ( editando:boolean             ) { this.editando = editando             }
+  setInsertandoNuevo      ( insertando:boolean           ) { this.insertandoNuevo = insertando           }
+
   
   // Para bottom toolbar.
-  public botonNuevo       : string     = "Nuevo";
+  public botonEditar      : string     = "Editar";
   public insertandoNuevo  : boolean    = false;
 
   constructor(
@@ -76,14 +80,6 @@ export class PagePrincipalComponent implements OnInit {
   }
   //.................................................
 
-  peticionArticulos() {
-
-  }
-
-  peticionUltimaRevision() {
-    
-  }
-
   // Hace una petición al back para listar los Articulos de la base de datos.
   listarArticulos() {
     // Primero se hace petición de los Articulos...
@@ -107,24 +103,10 @@ export class PagePrincipalComponent implements OnInit {
     this.articuloSeleccionado  = articulo;    
     this.articuloSeleccionadoB = true;
 
-    console.log("Articulo seleccionado: ", articulo);
-  }
-
-  vistaArticuloToggle() {
-    this.visualizandoArticulo = !this.visualizandoArticulo;
-    this.resetLista();
-  }
-
-  setEditando( editando: boolean ) {
-    this.editando = editando;
+    console.log("Articulo seleccionado: ", this.articuloSeleccionado);
   }
 
   // Para bottom toolbar..................................
-  // Navega a la pantalla de nuevo Articulo.
-  nuevoArticulo() { //TODO QUITAR
-    this.insertandoNuevo = !this.insertandoNuevo;
-    this.botonNuevo = this.insertandoNuevo ? "Cancelar" : "Nuevo";
-  }
 
   // Abre un Dialog para confirmar la eliminación del artículo y se queda esperando la respuesta.
   eliminarArticuloDialog() {
@@ -149,8 +131,11 @@ export class PagePrincipalComponent implements OnInit {
   resetLista() {
     this.articuloSeleccionado  = new Articulo();
     this.articuloSeleccionadoB = false;
+    this.visualizandoArticulo  = false
+    this.editando = false;
+    this.insertandoNuevo = false;
     this.listarArticulos();
 
-    console.log("Lista reseteada correctamente.");
+    console.log("Lista reseteada.");
   }
 }
