@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Articulo } from 'src/app/db/articulo';
 
 @Component({
@@ -21,24 +21,38 @@ import { Articulo } from 'src/app/db/articulo';
   `
   ]
 })
-export class BottomToolbarComponent implements OnInit {
-
+export class BottomToolbarComponent implements OnInit, OnChanges {
   
-  @Input() botonVerArticulo     : string   = "Ver artículo"; //TODO: Esta variable puede que no tenga que ser un input.
   @Input() editando             : boolean  = false;
   @Input() insertandoNuevo      : boolean  = false;
   @Input() visualizandoArticulo : boolean  = false;
   @Input() articuloSeleccionadoB: boolean  = false;
   @Input() articuloSeleccionado : Articulo = new Articulo(); //TODO: Probablemente solo necesite un boolean.
   
-  @Output() eliminarArticuloDialog      = new EventEmitter<void>();
-  @Output() visualizandoArticuloEmitter = new EventEmitter<boolean>();
-  @Output() editandoEmitter             = new EventEmitter<boolean>();
+  @Output() eliminarArticuloDialog        = new EventEmitter<void>();
+  @Output() generarDataMatrixEmitter      = new EventEmitter<void>();
+
+  @Output() vistaArticuloEmitter = new EventEmitter<string>();
   
-  botonEditar         : string   = this.editando ? "Cancelar" : "Editar";; //TODO: Esta variable puede que no tenga que ser un input.
+  
+  @Input() editar: boolean = false;
+  @Input() nuevo: boolean = false;
+  @Input() ver: boolean = false;
+  
+  botonEditar : string   = "";//this.editar ? "Cancelar" : "Editar";
 
   constructor() { }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.botonEditar = this.editar ? "Cancelar" : "Editar";
+  }
+
   ngOnInit(): void {
   }
+
+  botonEditarFunciones() {
+    if ( !this.editar ) this.vistaArticuloEmitter.emit('EDITAR');
+    else this.vistaArticuloEmitter.emit('ATRAS')
+  }
+
 }

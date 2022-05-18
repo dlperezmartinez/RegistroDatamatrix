@@ -27,12 +27,10 @@
 
         <app-toolbar
             (toggleSideNav)="toggleSideNav()"
-            (visualizandoArticuloEmitter)="setVisualizandoArticulo($event)"
-            (insertandoNuevoEmitter)="setInsertandoNuevo($event)"
-            (editandoEmitter)="setEditando($event)"
+            (vistaArticuloEmitter)="vistaArticulo($event)"
             [visualizandoArticulo]="visualizandoArticulo"
             [editando]="editando"
-            [insertandoNuevo]="insertandoNuevo"
+            [insertandoNuevo]="nuevo"
             [articuloSeleccionadoB]="articuloSeleccionadoB"
             ></app-toolbar>
 
@@ -46,9 +44,9 @@
             *ngIf="!visualizandoArticulo && !editando && !insertandoNuevo"
             [articulos]="articulos"
             [ultimasRevisiones]="ultimasRevisiones"
-            (visualizandoArticuloEmitter)="setVisualizandoArticulo($event)"
             (elementoSeleccionado)="elementoSeleccionado($event)"
             (resetLista)="resetLista()"
+            (vistaArticuloEmitter)="vistaArticulo($event)"
             ></app-lista-articulos> <!-- TODO: El error que sale por la consola apareció cuando hice el método reset lista y le puse el emit aquí-->
 
             <!-- VISTA ARTÍCULO -->
@@ -58,6 +56,12 @@
                 [visualizandoArticulo]="visualizandoArticulo"
                 [insertandoNuevo]="insertandoNuevo"
                 [editando]="editando"
+
+                [editar]="editar"
+                [nuevo]="nuevo"
+                [ver]="ver"
+
+                (vistaArticuloEmitter)="vistaArticulo($event)"
                 ></app-vista-articulo>
 
     </div>
@@ -72,8 +76,12 @@
             [articuloSeleccionadoB]="articuloSeleccionadoB"
             [editando]="editando"
             (eliminarArticuloDialog)="eliminarArticuloDialog()"
-            (visualizandoArticuloEmitter)="setVisualizandoArticulo($event)"
-            (editandoEmitter)="setEditando($event)"
+            (vistaArticuloEmitter)="vistaArticulo($event)"
+            (generarDataMatrixEmitter)="generarDataMatrix()"
+
+            [editar]="editar"
+            [nuevo]="nuevo"
+            [ver]="ver"
             ></app-bottom-toolbar>
 
     </div>

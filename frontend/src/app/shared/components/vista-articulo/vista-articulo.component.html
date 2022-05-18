@@ -1,13 +1,20 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center" >
 
-  <app-ver
-    *ngIf="visualizandoArticulo && !editando"
-    [articulo]="articulo"
-    [listaRevisiones]="listaRevisiones"
-    ></app-ver>
+    <app-editar
+      *ngIf="editar"
+      [articulo]="articulo"
+      (vistaArticuloEmitter)="vistaArticuloEmitter.emit($event)"
+      ></app-editar>
 
     <app-nuevo
-      *ngIf="insertandoNuevo"
+      *ngIf="nuevo"
+      (vistaArticuloEmitter)="vistaArticuloEmitter.emit($event)"
       ></app-nuevo>
+
+    <app-ver
+      *ngIf="ver"
+      [articulo]="articulo"
+      [listaRevisiones]="listaRevisiones"
+      ></app-ver>
 
 </div>

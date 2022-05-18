@@ -7,6 +7,7 @@ import com.google.zxing.datamatrix.DataMatrixWriter;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -22,15 +23,23 @@ public class DataMatrix {
     int ancho = 144;
     int alto  = 144;
 
-    public void generarDataMatrixImagen(String nombre, Long id) throws IOException {
+    public byte[] generarDataMatrixImagen(String nombre, Long id) throws IOException {
         DataMatrixWriter dataMatrixWriter = new DataMatrixWriter();
 
         BitMatrix bitMatrix = dataMatrixWriter.encode(String.valueOf(id), BarcodeFormat.DATA_MATRIX, ancho, alto);
 
+        // Imagen generada en memoria
         BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
 
+        // Grabando imagen en disco.
         File file = new File(outputPath + nombre + "_" + id + ".jpg");
         ImageIO.write(bufferedImage, "jpg", file);
+
+        // Transformando la imagen de la memoria a byte[]
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "jpg", baos);
+        byte[] bytes = baos.toByteArray();
+        return bytes;
     }
 
     public void consultarArticuloConDataMatrix(ImageIO imagen) {

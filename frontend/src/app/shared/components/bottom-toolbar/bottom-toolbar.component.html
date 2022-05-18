@@ -2,30 +2,42 @@
     <!-- ELIMINAR -->
     <button mat-raised-button color="warn" 
         matTooltip="Eliminar artículo seleccionado"
+        *ngIf="!editar && !nuevo"
         [disabled]="!articuloSeleccionadoB"
         (click)="this.eliminarArticuloDialog.emit()"
         >Eliminar</button>
 
     <span class="espaciador"></span>
 
-    <!-- ETIQUETA CODIGO DATA MATRIX -->
+    <!-- GENERAR CODIGO DATA MATRIX -->
     <button mat-raised-button color="primary"
+        *ngIf="!editar && !nuevo"
         [disabled]="!articuloSeleccionadoB"
-        >Etiqueta Data Matrix</button>
+        (click)="generarDataMatrixEmitter.emit()"
+        >Generar Data Matrix</button>
 
     <!-- VER ARTÍCULO -->
     <button mat-raised-button 
         matTooltip="Ver el artículo seleccionado"
         color="primary"
-        *ngIf="!visualizandoArticulo"
+        *ngIf="!ver && !editar && !nuevo"
         [disabled]="!articuloSeleccionadoB"
-        (click)="visualizandoArticuloEmitter.emit(true)"
-        >{{ botonVerArticulo }}</button>
+        (click)="vistaArticuloEmitter.emit('VER')"
+        >Ver artículo</button>
 
+    <!-- EDITAR -->
     <button mat-raised-button 
         matTooltip="Ver el artículo seleccionado"
-        *ngIf="editando || visualizandoArticulo"
-        [ngClass]="{'cancelar-edicion' : editando, 'editar': !editando}"
-        (click)="editandoEmitter.emit(true)"
+        *ngIf="editar || ver"
+        [ngClass]="{'cancelar-edicion' : editar, 'editar': !editar}"
+        (click)="botonEditarFunciones()"
         >{{ botonEditar }}</button>
+
+    <!-- GUARDAR -->
+    <button mat-raised-button 
+        matTooltip="Guardar el nuevo artculo"
+        *ngIf="nuevo || editar"
+        (click)="vistaArticuloEmitter.emit('GUARDAR')"
+        >Guardar</button>
+
 </mat-toolbar>

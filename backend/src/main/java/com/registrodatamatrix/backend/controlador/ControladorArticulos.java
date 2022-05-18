@@ -3,13 +3,17 @@ package com.registrodatamatrix.backend.controlador;
 import com.registrodatamatrix.backend.basedatos.Tablas.Articulo;
 import com.registrodatamatrix.backend.basedatos.Tablas.Revision;
 import com.registrodatamatrix.backend.datamatrix.DataMatrix;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.registrodatamatrix.backend.services.DBService;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @RestController
@@ -66,12 +70,25 @@ public class ControladorArticulos {
     }
 
     @PostMapping("eliminar")
-    public ResponseEntity<?> eliminar(@RequestBody Articulo articulo) {
-
+    public ResponseEntity<Articulo> eliminar(@RequestBody Articulo articulo) {
+        var articuloBorrado = articulo;
         // Se hace la petición al servicio.
         dbService.eliminarArticulo(articulo);
 
         // Se envía la respuesta.
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(articuloBorrado, HttpStatus.OK);
+    }
+
+    @GetMapping("datamatrix")
+    public ResponseEntity<byte[]> generarDataMatrix(Long id) throws IOException {
+
+        byte[] dataMatrixEnBytes = dataMatrix.generarDataMatrixImagen(id.toString(), id);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(dataMatrixEnBytes, headers, HttpStatus.OK);
+
+
+//        return new ResponseEntity<>(dataMatrixEnBytes, HttpStatus.OK);
     }
 }

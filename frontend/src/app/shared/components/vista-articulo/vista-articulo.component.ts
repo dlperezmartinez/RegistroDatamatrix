@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
 import { delay } from 'rxjs';
 import { Articulo } from 'src/app/db/articulo';
 import { Revision } from 'src/app/db/revision';
 import { DatosCompartidosService } from 'src/app/services/datos-compartidos.service';
 import { DbServiceRevisionService } from 'src/app/services/db-service-revision.service';
+import { EditarComponent } from './editar/editar.component';
+import { NuevoComponent } from './nuevo/nuevo.component';
 
 @Component({
   selector: 'app-vista-articulo',
@@ -36,6 +38,15 @@ export class VistaArticuloComponent implements OnInit {
   @Input() editando             : boolean  = false;
   @Input() insertandoNuevo      : boolean  = false;
 
+  @Input() editar: boolean = false;
+  @Input() nuevo: boolean = false;
+  @Input() ver: boolean = false;
+
+  @Output() vistaArticuloEmitter = new EventEmitter<string>();
+
+  @ViewChild(NuevoComponent ) nuevoComponent !: NuevoComponent;
+  @ViewChild(EditarComponent) editarComponent!: EditarComponent;
+
 
   constructor(
     private datosCompartidos : DatosCompartidosService,
@@ -52,9 +63,9 @@ export class VistaArticuloComponent implements OnInit {
     this.listarRevisiones( this.articulo );
 
     console.log("00000000000000000");
-    console.log("Visualizando", this.visualizandoArticulo);
-    console.log("editando", this.editando);
-    console.log("insertando", this.insertandoNuevo);
+    console.log("editar", this.editar);
+    console.log("nuevo", this.nuevo);
+    console.log("ver", this.ver);
     
     
   }

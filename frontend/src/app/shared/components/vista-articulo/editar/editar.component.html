@@ -1,1 +1,52 @@
-<p>editar works!</p>
+<form (ngSubmit)="guardar()" [formGroup]="formulario" autocomplete="off">
+
+    <div>
+
+        <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>
+
+                    <!-- NOMBRE -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="nombre">
+                    </mat-form-field>
+
+            </mat-card-title>
+            <mat-card-subtitle>
+
+                    <!-- MODELO -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Modelo</mat-label>
+                        <input matInput formControlName="modelo">
+                    </mat-form-field>
+
+            </mat-card-subtitle>
+        </mat-card-header>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+        <mat-card-content>
+            <p>
+                <!-- DESCRIPCIÓN -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Descripción</mat-label>
+                    <textarea matInput formControlName="descripcion"></textarea>
+                </mat-form-field>
+
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>Ver revisiones</button>
+            <button mat-button>SHARE</button>
+        </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <!-- <div>
+        <mat-list role="list">
+        <mat-list-item role="listitem">Revisiones realizadas:</mat-list-item>
+        <mat-list-item role="listitem" *ngFor="let revision of listaRevisiones">{{ revision }}</mat-list-item>
+        </mat-list>
+
+    </div> -->
+
+</form>

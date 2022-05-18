@@ -17,6 +17,9 @@ import { SharedModule } from './shared/shared.module';
 import { DbServiceServiceArticulo } from './services/db-service-articulo.service';
 import { DbServiceRevisionService } from './services/db-service-revision.service';
 
+// file-saver
+import { saveAs } from 'file-saver';
+
 @NgModule({
   declarations: [
     AppComponent,

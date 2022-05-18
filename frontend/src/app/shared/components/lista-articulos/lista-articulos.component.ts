@@ -23,9 +23,10 @@ export class ListaArticulosComponent implements OnInit {
   @Input() articulos        : Articulo[] = [];
   @Input() ultimasRevisiones: Date    [] = [];
 
-  @Output() visualizandoArticuloEmitter        = new EventEmitter<boolean>();
   @Output() elementoSeleccionado               = new EventEmitter<Articulo>();
   @Output() resetLista                         = new EventEmitter<void>();
+
+  @Output() vistaArticuloEmitter = new EventEmitter<string>();
 
   constructor() { }
 

@@ -29,11 +29,9 @@ export class ToolbarComponent implements OnInit {
 
   @Input() articuloSeleccionadoB: boolean = false; // Por no crear más variables en el padre, envío aquí el artículo seleccionado.
 
-  @Output() toggleSideNav               = new EventEmitter<void>();
+  @Output() toggleSideNav        = new EventEmitter<void>();
 
-  @Output() visualizandoArticuloEmitter = new EventEmitter<boolean>();
-  @Output() insertandoNuevoEmitter      = new EventEmitter<boolean>();
-  @Output() editandoEmitter             = new EventEmitter<boolean>();
+  @Output() vistaArticuloEmitter = new EventEmitter<string>();
 
   // CONSTRUCTOR Y NGON's
   constructor( 
@@ -47,9 +45,5 @@ export class ToolbarComponent implements OnInit {
   }
 
   // MÉTODOS
-  volver() {
-    this.visualizandoArticuloEmitter.emit(false);
-    this.insertandoNuevoEmitter.emit(false)
-    this.editandoEmitter.emit(false)
-  }
+
 }

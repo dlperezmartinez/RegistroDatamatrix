@@ -1,11 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Articulo } from 'src/app/db/articulo';
 import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.service';
 import { DbServiceRevisionService } from 'src/app/services/db-service-revision.service';
 import { DialogEliminarComponent } from '../../components/dialogs/dialog-eliminar/dialog-eliminar.component';
+import { VistaArticuloComponent } from '../../components/vista-articulo/vista-articulo.component';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-page-principal',
@@ -58,15 +60,24 @@ export class PagePrincipalComponent implements OnInit {
   public botonEditar      : string     = "Editar";
   public insertandoNuevo  : boolean    = false;
 
+
+  editar:boolean=false;
+  nuevo:boolean=false;
+  ver:boolean=false;
+  @ViewChild(VistaArticuloComponent) vistaArticuloComponent!: VistaArticuloComponent;
+
   constructor(
     private dbServiceArticulo: DbServiceServiceArticulo,
     private dbServiceRevision: DbServiceRevisionService,
     public dialog: MatDialog,
     private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this.resetLista();
+
+    this.route.params.subscribe( (params: Params) => this.articuloSeleccionado = params['conArticulo'])
   }
 
   /* MÉTODOS */
@@ -118,14 +129,29 @@ export class PagePrincipalComponent implements OnInit {
   }
   
   // Elimina el Articulo seleccionado en la lista.
-  eliminarArticulo( ) {
+  eliminarArticulo() {
     this.dbServiceArticulo.eliminar( this.articuloSeleccionado )
-      .subscribe(res => {
-        console.log(res) //TODO: Me gustaría controlar si se ha eliminado correctamente.
+      .subscribe( res => {
+        console.log("Articulo eliminado: ", res)
 
         // Se vuelve a hacer la petición al back para listar los Articulos y se limpia de la memoria el articulo eliminado.
         this.resetLista();
       });
+  }
+
+  // Genera el código DataMatrix del artículo seleccionado.
+  generarDataMatrix() {
+    // let data = "";
+    // this.dbServiceArticulo.getData('https://localhost:8080/articulos/datamatrix?id=8')
+    //   .subscribe(
+      //   imgData => data = imgData,
+      //   err => console.log(err)
+      // );
+
+      // this.dbServiceArticulo.generarDataMatrix( this.articuloSeleccionado )
+      //   .subscribe( (res: any) => console.log( "res" ));
+
+      // saveAs("https://httpbin.org/image", "image.jpg");
   }
 
   resetLista() {
@@ -137,5 +163,35 @@ export class PagePrincipalComponent implements OnInit {
     this.listarArticulos();
 
     console.log("Lista reseteada.");
+  }
+
+  // Navegación
+  vistaArticulo( tipo: string ) {
+    this.visualizandoArticulo = true; 
+
+    let comprobarNuevoEditar = this.nuevo;
+            
+    this.editar =false;
+    this.nuevo  =false;
+    this.ver    =false;
+
+    switch ( tipo ) {
+      case "VER":
+        this.ver = true;
+        break;
+      case "NUEVO":
+        this.nuevo = true;
+        break;
+      case "EDITAR":
+        this.editar = true;
+        break;
+      case "ATRAS":
+        this.visualizandoArticulo = false;
+        break;
+      case "GUARDAR":
+        if ( comprobarNuevoEditar ) this.vistaArticuloComponent.nuevoComponent.guardar();
+        else this.vistaArticuloComponent.editarComponent.guardar();
+        break;
+    }
   }
 }

@@ -20,7 +20,7 @@
     <button 
       mat-icon-button 
       *ngIf="visualizandoArticulo || editando || insertandoNuevo"
-      (click)="volver()"
+      (click)="vistaArticuloEmitter.emit('ATRAS')"
       >
       <mat-icon>arrow_back</mat-icon>
     </button>
@@ -34,14 +34,13 @@
     <button 
       *ngIf="!visualizandoArticulo && articuloSeleccionadoB == true"
       mat-icon-button 
-      (click)="editandoEmitter.emit(true)"
-      (click)="visualizandoArticuloEmitter.emit(true)"
+      (click)="vistaArticuloEmitter.emit('EDITAR')"
       ><mat-icon>edit</mat-icon></button>
 
     <button 
       *ngIf="!visualizandoArticulo"
       mat-icon-button 
-      (click)="insertandoNuevoEmitter.emit(true)"
+      (click)="vistaArticuloEmitter.emit('NUEVO')"
       ><mat-icon>add</mat-icon></button>
 
   </mat-toolbar-row>

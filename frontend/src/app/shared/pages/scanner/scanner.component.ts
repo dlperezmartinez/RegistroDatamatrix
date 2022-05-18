@@ -3,6 +3,8 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { Router } from '@angular/router';
 import { BarcodeFormat } from '@zxing/library';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner';
+import { Articulo } from 'src/app/db/articulo';
+import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.service';
 
 @Component({
   selector: 'app-scanner',
@@ -30,12 +32,11 @@ export class ScannerComponent implements OnInit {
 
   allowedFormats = [ BarcodeFormat.QR_CODE, BarcodeFormat.EAN_13, BarcodeFormat.CODE_128, BarcodeFormat.DATA_MATRIX ];
 
-  @Output() codigoDataMatrix = new EventEmitter<number>();
-
   // @ViewChild('scanner', { static: false })
   // scanner: ZXingScannerComponent = this.getBackCamera();
   
   constructor(
+    private dbServiceArticulo: DbServiceServiceArticulo,
     private router: Router,
   ) { }
 
@@ -49,6 +50,8 @@ export class ScannerComponent implements OnInit {
   onCodeResult(codigoDataMatrix: string) {
     console.log("Código DataMatrix escaneado: ", Number(codigoDataMatrix));
     
-    this.codigoDataMatrix.emit(Number(codigoDataMatrix))
+    this.dbServiceArticulo.consultar("por-id", Number(codigoDataMatrix))
+    .subscribe( res => this.router.navigate([ 'page-principal', res ]));
+
   }
 }

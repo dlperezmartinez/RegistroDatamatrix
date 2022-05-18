@@ -8,6 +8,7 @@ const routes: Routes = [
     path: '',
     children: [
       { path: 'page-principal', component: PagePrincipalComponent },
+      { path: 'page-principal/:conArticulo', component: PagePrincipalComponent },
       { path: 'scanner', component: ScannerComponent },
       { path: '**', redirectTo: 'page-principal' }
     ]

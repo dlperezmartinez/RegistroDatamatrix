@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
+import { Byte } from '@angular/compiler/src/util';
 // import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { environment } from 'src/environments/environment';
 import { Articulo } from '../db/articulo';
 
@@ -30,8 +32,35 @@ export class DbServiceServiceArticulo {
     return this.httpClient.put<Articulo>( this.rootUrl + "actualizar", articulo );
   }
 
-  eliminar ( articulo: Articulo ): Observable<void> {
-    return this.httpClient.post<void>( this.rootUrl + "eliminar", articulo );
+  eliminar ( articulo: Articulo ): Observable<Articulo> {
+    return this.httpClient.post<Articulo>( this.rootUrl + "eliminar", articulo );
+  }
+
+  generarDataMatrix( articulo: Articulo ): Observable<any> {
+    return this.httpClient.get<any>( this.rootUrl + "datamatrix?id=" + articulo.id );
+  }
+
+
+
+
+  getData(url: string): Observable<string> {
+    return this.httpClient.get(url, { responseType: 'blob' })
+      .pipe(
+        switchMap(response => this.readFile(response))
+      );
+  }
+
+  private readFile(blob: Blob): Observable<string> {
+    return Observable.create((obs: any) => {
+      const reader = new FileReader();
+
+      reader.onerror = err => obs.error(err);
+      reader.onabort = err => obs.error(err);
+      reader.onload = () => obs.next(reader.result);
+      reader.onloadend = () => obs.complete();
+
+      return reader.readAsDataURL(blob);
+    });
   }
 }
 
