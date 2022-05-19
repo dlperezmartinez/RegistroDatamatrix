@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { delay } from 'rxjs';
 import { Articulo } from 'src/app/db/articulo';
 import { Revision } from 'src/app/db/revision';
@@ -6,27 +6,14 @@ import { DatosCompartidosService } from 'src/app/services/datos-compartidos.serv
 import { DbServiceRevisionService } from 'src/app/services/db-service-revision.service';
 import { EditarComponent } from './editar/editar.component';
 import { NuevoComponent } from './nuevo/nuevo.component';
+import { VerComponent } from './ver/ver.component';
 
 @Component({
   selector: 'app-vista-articulo',
   templateUrl: './vista-articulo.component.html',
-  styles: [`
-  mat-card {
-    margin-top: 15px;
-  }
-  img {
-    max-width: 600px;
-  }
-  .imagen-escritorio {
-    max-width: 40%;
-  }
-  .imagen-movil {
-    
-  }
-  `
-  ]
+  styleUrls: ['./vista-articulo-styles.css'],
 })
-export class VistaArticuloComponent implements OnInit {
+export class VistaArticuloComponent implements OnInit, AfterViewChecked {
 
   seccion           : string   = "Vista Artículo"; // Variable para establecer el título de la sección en la toolbar.
   vistaMovil        : boolean  = true; 
@@ -34,45 +21,47 @@ export class VistaArticuloComponent implements OnInit {
 
   @Input() articulo : Articulo = new Articulo();
 
-  @Input() visualizandoArticulo : boolean  = false;
-  @Input() editando             : boolean  = false;
-  @Input() insertandoNuevo      : boolean  = false;
-
   @Input() editar: boolean = false;
   @Input() nuevo: boolean = false;
   @Input() ver: boolean = false;
 
   @Output() vistaArticuloEmitter = new EventEmitter<string>();
+  @Output() seccionEmitter       = new EventEmitter<string>();
 
-  @ViewChild(NuevoComponent ) nuevoComponent !: NuevoComponent;
-  @ViewChild(EditarComponent) editarComponent!: EditarComponent;
-
+  @ViewChild( EditarComponent ) editarComponent!: EditarComponent;
+  @ViewChild( NuevoComponent  ) nuevoComponent !: NuevoComponent;
+  @ViewChild( VerComponent    ) verComponent   !: VerComponent;
 
   constructor(
-    private datosCompartidos : DatosCompartidosService,
     private dbServiceRevision: DbServiceRevisionService,
+    private datosCompartidos : DatosCompartidosService,
   ) { 
+  }
+  ngAfterViewChecked(): void {
+    this.setSeccion();
   }
 
   ngOnInit(): void {
     this.datosCompartidos.setSeccion( this.seccion );
 
-    console.log( "Editando: ", this.editando )
-    console.log( this.articulo );
-
     this.listarRevisiones( this.articulo );
 
-    console.log("00000000000000000");
-    console.log("editar", this.editar);
-    console.log("nuevo", this.nuevo);
-    console.log("ver", this.ver);
-    
-    
+    console.log("Vista articulo: ");
+    console.log("Editar", this.editar);
+    console.log("Nuevo", this.nuevo);
+    console.log("Ver", this.ver);
   }
 
   listarRevisiones( articulo: Articulo ) {
     let articuloALista = [articulo];
     this.dbServiceRevision.consultar( "todo", articuloALista )
       .subscribe( (res: Date[]) => this.listaRevisiones = res )
+  }
+
+  // Setea la sección según las variables booleanas editar, nuevo y ver.
+  setSeccion() {
+    if( this.editar ) this.seccionEmitter.emit( this.editarComponent.seccion );
+    if( this.nuevo  ) this.seccionEmitter.emit( this.nuevoComponent.seccion  );
+    if( this.ver    ) this.seccionEmitter.emit( this.verComponent.seccion    );
   }
 }

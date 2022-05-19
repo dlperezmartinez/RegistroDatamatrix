@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Articulo } from 'src/app/db/articulo';
 
 @Component({
@@ -18,7 +18,9 @@ import { Articulo } from 'src/app/db/articulo';
   `
   ]
 })
-export class ListaArticulosComponent implements OnInit {
+export class ListaArticulosComponent implements OnInit, AfterViewInit {
+
+  seccion: string = "Lista Artículos";
 
   @Input() articulos        : Articulo[] = [];
   @Input() ultimasRevisiones: Date    [] = [];
@@ -27,8 +29,12 @@ export class ListaArticulosComponent implements OnInit {
   @Output() resetLista                         = new EventEmitter<void>();
 
   @Output() vistaArticuloEmitter = new EventEmitter<string>();
+  @Output() seccionEmitter       = new EventEmitter<string>();
 
   constructor() { }
+  ngAfterViewInit(): void {
+    this.seccionEmitter.emit( this.seccion );
+  }
 
   ngOnInit(): void {
     this.resetLista.emit();

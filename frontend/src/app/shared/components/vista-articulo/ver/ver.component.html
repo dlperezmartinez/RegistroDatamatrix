@@ -1,27 +1,14 @@
-<div>
+<h1>Nombre: </h1>
+{{ articulo.nombre }}
 
-    <mat-card class="card">
-      <mat-card-header>
-        <mat-card-title>{{ articulo.nombre }}</mat-card-title>
-        <mat-card-subtitle>{{ articulo.modelo }}</mat-card-subtitle>
-      </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
-      <mat-card-content>
-        <p>
-          {{ articulo.descripcion }}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>Ver revisiones</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+<mat-divider></mat-divider>
 
-  <div>
-    <mat-list role="list">
-      <mat-list-item role="listitem">Revisiones realizadas:</mat-list-item>
-      <mat-list-item role="listitem" *ngFor="let revision of listaRevisiones">{{ revision }}</mat-list-item>
-    </mat-list>
+<h2>Modelo: </h2>
+{{ articulo.modelo }}
 
-</div>
+<mat-divider></mat-divider>
+
+<h3>Descripción: </h3>
+<p>
+  {{ articulo.descripcion }}
+</p>

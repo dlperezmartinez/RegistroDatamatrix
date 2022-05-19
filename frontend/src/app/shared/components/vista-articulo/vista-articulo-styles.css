@@ -1,0 +1,8 @@
+.vista-articulo, .vista-articulo-component {
+    width: 90%;
+    margin: 20px;
+}
+
+mat-divider {
+    margin: 15px 15px 0 0;
+}

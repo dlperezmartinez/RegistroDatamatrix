@@ -37,8 +37,9 @@
       (click)="vistaArticuloEmitter.emit('EDITAR')"
       ><mat-icon>edit</mat-icon></button>
 
+      <!-- TODO: AQUÍ HAY QUE CAMBIAR LAS VARIALES VIEJAS POR LAS NUEVAS (VER, EDITAR, NUEVO) -->
     <button 
-      *ngIf="!visualizandoArticulo"
+      *ngIf="!editando || !insertandoNuevo"
       mat-icon-button 
       (click)="vistaArticuloEmitter.emit('NUEVO')"
       ><mat-icon>add</mat-icon></button>

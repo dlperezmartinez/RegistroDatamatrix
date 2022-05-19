@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Articulo } from 'src/app/db/articulo';
 import { Revision } from 'src/app/db/revision';
+import { DatosCompartidosService } from 'src/app/services/datos-compartidos.service';
 import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.service';
 import { DbServiceRevisionService } from 'src/app/services/db-service-revision.service';
 
@@ -10,14 +11,16 @@ import { DbServiceRevisionService } from 'src/app/services/db-service-revision.s
   templateUrl: './nuevo.component.html',
   styles: [`
   :host {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start; */
   }
   `
   ]
 })
 export class NuevoComponent implements OnInit {
+
+  seccion: string = "Nuevo Artículo"
 
   nuevoArticulo: Articulo = new Articulo();
   nuevaRevision: Revision = new Revision();
@@ -34,10 +37,12 @@ export class NuevoComponent implements OnInit {
   constructor(
     private dbServiceArticulo: DbServiceServiceArticulo,
     private dbServiceRevision: DbServiceRevisionService,
+    private datosCompartidos : DatosCompartidosService,
     private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
+    this.datosCompartidos.setSeccion( this.seccion );
   }
 
   guardar() {

@@ -1,17 +1,20 @@
-<div class="container" fxLayout="row" fxLayoutAlign="center" >
+<div class="container vista-articulo" fxLayout="row">
 
     <app-editar
+      class="vista-articulo-component"
       *ngIf="editar"
       [articulo]="articulo"
       (vistaArticuloEmitter)="vistaArticuloEmitter.emit($event)"
       ></app-editar>
 
     <app-nuevo
+      class="vista-articulo-component"
       *ngIf="nuevo"
       (vistaArticuloEmitter)="vistaArticuloEmitter.emit($event)"
       ></app-nuevo>
 
     <app-ver
+      class="vista-articulo-component"
       *ngIf="ver"
       [articulo]="articulo"
       [listaRevisiones]="listaRevisiones"

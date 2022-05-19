@@ -20,18 +20,22 @@ export class ToolbarComponent implements OnInit {
   // VARIABLES
   titulo : string = "REGISTRO DATAMATRIX";
   seccion: string = "";
+  setSeccion( seccion: string ) { this.seccion = seccion }
   
-  @Input() set setSeccion( seccion: string ) { this.seccion = seccion } 
-
   @Input() visualizandoArticulo : boolean = false;
   @Input() editando             : boolean = false;
   @Input() insertandoNuevo      : boolean = false;
-
+  
+  @Input() editar: boolean = false;
+  @Input() nuevo: boolean = false;
+  @Input() ver: boolean = false;
+  
   @Input() articuloSeleccionadoB: boolean = false; // Por no crear más variables en el padre, envío aquí el artículo seleccionado.
-
+  
   @Output() toggleSideNav        = new EventEmitter<void>();
-
+  
   @Output() vistaArticuloEmitter = new EventEmitter<string>();
+  
 
   // CONSTRUCTOR Y NGON's
   constructor( 
@@ -41,9 +45,10 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("Router url toolbar: ", this.router.url);
-    this.seccion = this.datosCompartidos.getSeccion();
   }
 
   // MÉTODOS
-
+  getSeccion() {
+    this.seccion = this.datosCompartidos.getSeccion();
+  }
 }

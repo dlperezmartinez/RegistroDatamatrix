@@ -15,7 +15,6 @@ export class DbServiceServiceArticulo {
 
   constructor( 
     private httpClient: HttpClient,
-    // private http: HTTP, //TODO: Peticiones en el mobil.
     ) { }
 
   consultar ( opcion: string, id?: number ): Observable<Articulo[]> {
@@ -36,8 +35,8 @@ export class DbServiceServiceArticulo {
     return this.httpClient.post<Articulo>( this.rootUrl + "eliminar", articulo );
   }
 
-  generarDataMatrix( articulo: Articulo ): Observable<any> {
-    return this.httpClient.get<any>( this.rootUrl + "datamatrix?id=" + articulo.id );
+  generarDataMatrix( articulo: Articulo ) {
+    return this.httpClient.get( this.rootUrl + "datamatrix?id=" + articulo.id, { responseType: 'blob' } );
   }
 
 

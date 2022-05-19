@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { SharedRoutingModule } from './shared-routing.module';
-import { TablaComponent } from './components/tabla/tabla.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MaterialModule } from '../material.module';
-import { NuevoArticuloComponent } from './components/nuevo-articulo/nuevo-articulo.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VistaArticuloComponent } from './components/vista-articulo/vista-articulo.component';
@@ -24,9 +22,7 @@ import { NuevoComponent } from './components/vista-articulo/nuevo/nuevo.componen
 
 @NgModule({
   declarations: [
-    TablaComponent,
     ToolbarComponent,
-    NuevoArticuloComponent,
     VistaArticuloComponent,
     ScannerComponent,
     DialogEliminarComponent,
@@ -50,7 +46,6 @@ import { NuevoComponent } from './components/vista-articulo/nuevo/nuevo.componen
   ],
   exports: [
     ToolbarComponent,
-    TablaComponent,
   ]
 })
 export class SharedModule { }

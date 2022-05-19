@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { DbServiceRevisionService } from 'src/app/services/db-service-revision.s
 import { DialogEliminarComponent } from '../../components/dialogs/dialog-eliminar/dialog-eliminar.component';
 import { VistaArticuloComponent } from '../../components/vista-articulo/vista-articulo.component';
 import { saveAs } from 'file-saver';
+import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-page-principal',
@@ -31,7 +32,7 @@ import { saveAs } from 'file-saver';
   `
   ]
 })
-export class PagePrincipalComponent implements OnInit {
+export class PagePrincipalComponent implements OnInit, AfterViewInit {
   
   /* VARIABLES */
 
@@ -61,10 +62,11 @@ export class PagePrincipalComponent implements OnInit {
   public insertandoNuevo  : boolean    = false;
 
 
-  editar:boolean=false;
-  nuevo:boolean=false;
-  ver:boolean=false;
-  @ViewChild(VistaArticuloComponent) vistaArticuloComponent!: VistaArticuloComponent;
+  editar:boolean = false;
+  nuevo :boolean = false;
+  ver   :boolean = false;
+  @ViewChild( VistaArticuloComponent ) vistaArticuloComponent!: VistaArticuloComponent;
+  @ViewChild( ToolbarComponent       ) toolbarComponent!      : ToolbarComponent;
 
   constructor(
     private dbServiceArticulo: DbServiceServiceArticulo,
@@ -73,11 +75,18 @@ export class PagePrincipalComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
   ) { }
+  ngAfterViewInit(): void {
+    this.setSeccion("Lista de Artículos")
+  }
 
   ngOnInit(): void {
     this.resetLista();
 
-    this.route.params.subscribe( (params: Params) => this.articuloSeleccionado = params['conArticulo'])
+    // Aquí se recive la respuesta del Scanner y te carga en memoria el artículo seleccionado y cambia la vista a vista-articulo => ver
+    this.route.params.subscribe( (params: Params) => {
+      this.articuloSeleccionado = params['conArticulo']
+      this.ver = true;
+    })
   }
 
   /* MÉTODOS */
@@ -139,19 +148,12 @@ export class PagePrincipalComponent implements OnInit {
       });
   }
 
-  // Genera el código DataMatrix del artículo seleccionado.
+  // Genera el código DataMatrix del artículo seleccionado y te lo descarga.
   generarDataMatrix() {
-    // let data = "";
-    // this.dbServiceArticulo.getData('https://localhost:8080/articulos/datamatrix?id=8')
-    //   .subscribe(
-      //   imgData => data = imgData,
-      //   err => console.log(err)
-      // );
-
-      // this.dbServiceArticulo.generarDataMatrix( this.articuloSeleccionado )
-      //   .subscribe( (res: any) => console.log( "res" ));
-
-      // saveAs("https://httpbin.org/image", "image.jpg");
+    this.dbServiceArticulo.generarDataMatrix( this.articuloSeleccionado )
+    .subscribe( (res) => {
+      saveAs(res, "image.jpg");
+    });
   }
 
   resetLista() {
@@ -193,5 +195,10 @@ export class PagePrincipalComponent implements OnInit {
         else this.vistaArticuloComponent.editarComponent.guardar();
         break;
     }
+  }
+
+  // Setea la sección de la toolbar
+  setSeccion( seccion: string ) {
+    this.toolbarComponent.setSeccion( seccion );
   }
 }

@@ -1,15 +1,17 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Articulo } from 'src/app/db/articulo';
+import { DatosCompartidosService } from 'src/app/services/datos-compartidos.service';
 import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.service';
 
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.component.html',
-  styles: [
-  ]
+  styleUrls: ['../vista-articulo-styles.css'],
 })
 export class EditarComponent implements OnInit {
+
+  seccion: string = "Editar Artículo"
 
   @Input() articulo: Articulo = new Articulo();
 
@@ -25,6 +27,7 @@ export class EditarComponent implements OnInit {
 
   constructor(
     private dbServiceArticulo: DbServiceServiceArticulo,
+    private datosCompartidos : DatosCompartidosService,
     private fb: FormBuilder,
   ) { }
 
@@ -32,6 +35,8 @@ export class EditarComponent implements OnInit {
     this.formulario.controls['nombre'].setValue(this.articulo.nombre);
     this.formulario.controls['modelo'].setValue(this.articulo.modelo);
     this.formulario.controls['descripcion'].setValue(this.articulo.descripcion);
+
+    this.datosCompartidos.setSeccion( this.seccion );
   }
 
   guardar() {

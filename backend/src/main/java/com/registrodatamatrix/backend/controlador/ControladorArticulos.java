@@ -85,10 +85,7 @@ public class ControladorArticulos {
         byte[] dataMatrixEnBytes = dataMatrix.generarDataMatrixImagen(id.toString(), id);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
+        headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(dataMatrixEnBytes, headers, HttpStatus.OK);
-
-
-//        return new ResponseEntity<>(dataMatrixEnBytes, HttpStatus.OK);
     }
 }

@@ -1,24 +1,31 @@
 <form (ngSubmit)="guardar()" [formGroup]="formulario" autocomplete="off">
 
     <!-- NOMBRE -->
+    <h1></h1>
     <mat-form-field appearance="fill">
         <mat-label>Nombre</mat-label>
         <input matInput formControlName="nombre">
     </mat-form-field>
+    <mat-divider></mat-divider>
 
     <!-- MODELO -->
+    <h2></h2>
     <mat-form-field appearance="fill">
         <mat-label>Modelo</mat-label>
         <input matInput formControlName="modelo">
     </mat-form-field>
+    <mat-divider></mat-divider>
 
     <!-- DESCRIPCIÓN -->
+    <h3></h3>
     <mat-form-field appearance="fill">
         <mat-label>Descripción</mat-label>
         <textarea matInput formControlName="descripcion"></textarea>
     </mat-form-field>
+    <mat-divider></mat-divider>
 
     <!-- REVISIÓN -->
+    <h3></h3>
     <mat-form-field appearance="fill">
         <mat-label>Revisión</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="revision">
