@@ -38,6 +38,8 @@ export class BottomToolbarComponent implements OnInit, OnChanges {
   @Input() editar: boolean = false;
   @Input() nuevo: boolean = false;
   @Input() ver: boolean = false;
+
+  @Input() formularioValido: boolean = false;
   
   botonEditar : string   = "";//this.editar ? "Cancelar" : "Editar";
 
@@ -54,5 +56,4 @@ export class BottomToolbarComponent implements OnInit, OnChanges {
     if ( !this.editar ) this.vistaArticuloEmitter.emit('EDITAR');
     else this.vistaArticuloEmitter.emit('ATRAS')
   }
-
 }

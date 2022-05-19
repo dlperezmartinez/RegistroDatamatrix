@@ -34,8 +34,10 @@
         >{{ botonEditar }}</button>
 
     <!-- GUARDAR -->
+    <!-- [disabled]="!formularioValido" -->
     <button mat-raised-button 
         matTooltip="Guardar el nuevo artculo"
+        color="accent"
         *ngIf="nuevo || editar"
         (click)="vistaArticuloEmitter.emit('GUARDAR')"
         >Guardar</button>

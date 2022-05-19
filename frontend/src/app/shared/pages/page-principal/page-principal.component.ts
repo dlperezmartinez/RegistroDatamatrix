@@ -52,9 +52,9 @@ export class PagePrincipalComponent implements OnInit, AfterViewInit {
   // Para vista articulo.
   visualizandoArticulo    : boolean    = false; // Mostrar la vista articulo o no.
   editando                : boolean    = false; // Al cargar la vista artículo se le pasa este boolean para activar el modo edición con el articulo seleccionado.
-  setVisualizandoArticulo ( visualizandoArticulo:boolean ) { this.visualizandoArticulo = visualizandoArticulo }
-  setEditando             ( editando:boolean             ) { this.editando = editando             }
-  setInsertandoNuevo      ( insertando:boolean           ) { this.insertandoNuevo = insertando           }
+  setVisualizandoArticulo ( visualizandoArticulo: boolean ) { this.visualizandoArticulo = visualizandoArticulo }
+  setEditando             ( editando: boolean             ) { this.editando = editando             }
+  setInsertandoNuevo      ( insertando: boolean           ) { this.insertandoNuevo = insertando           }
 
   
   // Para bottom toolbar.
@@ -67,6 +67,9 @@ export class PagePrincipalComponent implements OnInit, AfterViewInit {
   ver   :boolean = false;
   @ViewChild( VistaArticuloComponent ) vistaArticuloComponent!: VistaArticuloComponent;
   @ViewChild( ToolbarComponent       ) toolbarComponent!      : ToolbarComponent;
+
+  formularioValido: boolean = false;
+  setFormularioValido ( valido: boolean ) { this.formularioValido = valido }
 
   constructor(
     private dbServiceArticulo: DbServiceServiceArticulo,
@@ -85,7 +88,7 @@ export class PagePrincipalComponent implements OnInit, AfterViewInit {
     // Aquí se recive la respuesta del Scanner y te carga en memoria el artículo seleccionado y cambia la vista a vista-articulo => ver
     this.route.params.subscribe( (params: Params) => {
       this.articuloSeleccionado = params['conArticulo']
-      this.ver = true;
+      if( !params ) this.ver = true;
     })
   }
 
@@ -193,6 +196,7 @@ export class PagePrincipalComponent implements OnInit, AfterViewInit {
       case "GUARDAR":
         if ( comprobarNuevoEditar ) this.vistaArticuloComponent.nuevoComponent.guardar();
         else this.vistaArticuloComponent.editarComponent.guardar();
+        this.resetLista();
         break;
     }
   }

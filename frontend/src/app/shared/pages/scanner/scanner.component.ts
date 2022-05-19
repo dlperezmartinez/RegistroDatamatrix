@@ -16,15 +16,19 @@ import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.s
       right: 0;
       z-index: 9999;
     }
-      :host zxing-scanner::ng-deep video {
-      max-height: 50vh;    
-      object-fit: contain;
-    }
-      :host zxing-scanner::ng-deep {
+    :host zxing-scanner::ng-deep video {
+      max-height: 700vh;
+      width: 100vw;
+      object-fit: fill;
+  }
+      /* :host zxing-scanner::ng-deep video {
+      object-fit: cover;
+    } */
+      /* :host zxing-scanner::ng-deep {
       border-style: solid;
       border-radius: 10px;
       border-color: #11171a;
-    } 
+    }  */
   `
   ]
 })

@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Articulo } from 'src/app/db/articulo';
 import { DatosCompartidosService } from 'src/app/services/datos-compartidos.service';
 import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.service';
+import { FormularioInvalidoComponent } from '../../dialogs/formulario-invalido/formulario-invalido.component';
 
 @Component({
   selector: 'app-editar',
@@ -28,6 +30,7 @@ export class EditarComponent implements OnInit {
   constructor(
     private dbServiceArticulo: DbServiceServiceArticulo,
     private datosCompartidos : DatosCompartidosService,
+    public dialog: MatDialog,
     private fb: FormBuilder,
   ) { }
 
@@ -40,9 +43,13 @@ export class EditarComponent implements OnInit {
   }
 
   guardar() {
-    this.actualizarArticulo();
+    if( this.formulario.valid ) {
+      this.actualizarArticulo();
 
-    this.vistaArticuloEmitter.emit("ATRAS");
+      this.vistaArticuloEmitter.emit("ATRAS");
+    } else {
+      this.dialog.open( FormularioInvalidoComponent );
+    }
   }
 
   actualizarArticulo() {

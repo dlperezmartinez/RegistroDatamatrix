@@ -1,10 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Articulo } from 'src/app/db/articulo';
 import { Revision } from 'src/app/db/revision';
 import { DatosCompartidosService } from 'src/app/services/datos-compartidos.service';
 import { DbServiceServiceArticulo } from 'src/app/services/db-service-articulo.service';
 import { DbServiceRevisionService } from 'src/app/services/db-service-revision.service';
+import { FormularioInvalidoComponent } from '../../dialogs/formulario-invalido/formulario-invalido.component';
 
 @Component({
   selector: 'app-nuevo',
@@ -38,6 +40,7 @@ export class NuevoComponent implements OnInit {
     private dbServiceArticulo: DbServiceServiceArticulo,
     private dbServiceRevision: DbServiceRevisionService,
     private datosCompartidos : DatosCompartidosService,
+    public dialog: MatDialog,
     private fb: FormBuilder,
   ) { }
 
@@ -46,9 +49,13 @@ export class NuevoComponent implements OnInit {
   }
 
   guardar() {
-    this.insertarNuevo();
+    if( this.formulario.valid ) {
+      this.insertarNuevo();
 
-    this.vistaArticuloEmitter.emit("ATRAS");
+      this.vistaArticuloEmitter.emit("ATRAS");
+    } else {
+      this.dialog.open( FormularioInvalidoComponent );
+    }
   }
 
   insertarNuevo() {

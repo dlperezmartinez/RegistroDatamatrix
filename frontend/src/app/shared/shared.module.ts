@@ -19,6 +19,7 @@ import { ListaArticulosComponent } from './components/lista-articulos/lista-arti
 import { VerComponent } from './components/vista-articulo/ver/ver.component';
 import { EditarComponent } from './components/vista-articulo/editar/editar.component';
 import { NuevoComponent } from './components/vista-articulo/nuevo/nuevo.component';
+import { FormularioInvalidoComponent } from './components/dialogs/formulario-invalido/formulario-invalido.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NuevoComponent } from './components/vista-articulo/nuevo/nuevo.componen
     VerComponent,
     EditarComponent,
     NuevoComponent,
+    FormularioInvalidoComponent,
   ],
   imports: [
     CommonModule,

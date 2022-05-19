@@ -1,11 +1,11 @@
-<div class="container" fxLayout.gt-sm="column" fxLayout.lt-md="column">
+<!-- <div class="container" fxLayout.gt-sm="row" fxLayout.lt-md="row">
 
-    <div fxFlex="auto" class="container">
+    <div fxFlex="auto" class="container"> -->
 
         <!-- CERRAR -->
-            <button mat-icon-button (click)="cerrar()">
-                <mat-icon>close</mat-icon>
-            </button>
+        <button mat-icon-button (click)="cerrar()">
+            <mat-icon>close</mat-icon>
+        </button>
 
         <!-- SCANNER -->
         <zxing-scanner 
@@ -14,6 +14,6 @@
             (scanSuccess)="onCodeResult($event)"
             ></zxing-scanner>
     
-    </div>
+    <!-- </div>
     
-</div>
+</div> -->

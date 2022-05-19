@@ -20,7 +20,7 @@ public class Articulo {
     private String modelo;
     private String descripcion;
 
-    @OneToMany(mappedBy = "articulo", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "articulo", cascade = CascadeType.REMOVE)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Revision> revisiones;
 

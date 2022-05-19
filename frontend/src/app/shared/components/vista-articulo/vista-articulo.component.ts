@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { delay } from 'rxjs';
 import { Articulo } from 'src/app/db/articulo';
 import { Revision } from 'src/app/db/revision';
@@ -25,8 +25,9 @@ export class VistaArticuloComponent implements OnInit, AfterViewChecked {
   @Input() nuevo: boolean = false;
   @Input() ver: boolean = false;
 
-  @Output() vistaArticuloEmitter = new EventEmitter<string>();
-  @Output() seccionEmitter       = new EventEmitter<string>();
+  @Output() vistaArticuloEmitter          = new EventEmitter<string>();
+  @Output() seccionEmitter                = new EventEmitter<string>();
+  @Output() formularioValidoEmitter       = new EventEmitter<boolean>();
 
   @ViewChild( EditarComponent ) editarComponent!: EditarComponent;
   @ViewChild( NuevoComponent  ) nuevoComponent !: NuevoComponent;
@@ -37,6 +38,7 @@ export class VistaArticuloComponent implements OnInit, AfterViewChecked {
     private datosCompartidos : DatosCompartidosService,
   ) { 
   }
+
   ngAfterViewChecked(): void {
     this.setSeccion();
   }

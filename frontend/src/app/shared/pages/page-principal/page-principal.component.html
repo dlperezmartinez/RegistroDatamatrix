@@ -66,6 +66,7 @@
 
                 (vistaArticuloEmitter)="vistaArticulo($event)"
                 (seccionEmitter)="setSeccion($event)"
+                (formularioValidoEmitter)="setFormularioValido($event)"
                 ></app-vista-articulo>
 
     </div>
@@ -85,6 +86,8 @@
             [editar]="editar"
             [nuevo]="nuevo"
             [ver]="ver"
+
+            [formularioValido]="formularioValido"
             ></app-bottom-toolbar>
 
     </div>
