@@ -14,24 +14,24 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class TestBaseDatos {
 
-    @Test
-    public void test() throws IOException, SQLException {
-
-
-
-
-        // TEST SQL
-        GestorDatos gestorDatos = new GestorDatos();
-
-        List<String> valoresPrueba = Arrays.asList("'NombreTest'", "'ModeloTest'");
-        Date date = new Date(26, 04, 2022);
-
-        gestorDatos.insertarArticulo(valoresPrueba);
-//        gestorDatos.insertarRevision(date);
-    }
-
-    @Test
-    public void testConSpring () {
-
-    }
+//    @Test
+//    public void test() throws IOException, SQLException {
+//
+//
+//
+//
+//        // TEST SQL
+//        GestorDatos gestorDatos = new GestorDatos();
+//
+//        List<String> valoresPrueba = Arrays.asList("'NombreTest'", "'ModeloTest'");
+//        Date date = new Date(26, 04, 2022);
+//
+//        gestorDatos.insertarArticulo(valoresPrueba);
+////        gestorDatos.insertarRevision(date);
+//    }
+//
+//    @Test
+//    public void testConSpring () {
+//
+//    }
 }
