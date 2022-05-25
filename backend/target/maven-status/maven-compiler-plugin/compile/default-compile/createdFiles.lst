@@ -1,0 +1,11 @@
+com\registrodatamatrix\backend\datamatrix\DataMatrix.class
+com\registrodatamatrix\backend\controlador\ControladorRevisiones.class
+com\registrodatamatrix\backend\datamatrix\GestorDatos.class
+com\registrodatamatrix\backend\excepciones\ArticuloNoEncontradoExcepcion.class
+com\registrodatamatrix\backend\basedatos\Tablas\Revision.class
+com\registrodatamatrix\backend\services\DBService.class
+com\registrodatamatrix\backend\basedatos\Repositorios\RevisionRepository.class
+com\registrodatamatrix\backend\controlador\ControladorArticulos.class
+com\registrodatamatrix\backend\basedatos\Repositorios\ArticuloRepository.class
+com\registrodatamatrix\backend\BackendApplication.class
+com\registrodatamatrix\backend\basedatos\Tablas\Articulo.class

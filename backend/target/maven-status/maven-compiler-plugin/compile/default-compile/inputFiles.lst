@@ -1,0 +1,11 @@
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\datamatrix\GestorDatos.java
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\basedatos\Repositorios\RevisionRepository.java
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\basedatos\Tablas\Revision.java
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\basedatos\Tablas\Articulo.java
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\services\DBService.java
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\excepciones\ArticuloNoEncontradoExcepcion.java
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\controlador\ControladorRevisiones.java
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\BackendApplication.java
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\basedatos\Repositorios\ArticuloRepository.java
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\datamatrix\DataMatrix.java
+D:\Documentos\_ProyectoDAM\RegistroDatamatrix\backend\src\main\java\com\registrodatamatrix\backend\controlador\ControladorArticulos.java
