@@ -12,8 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 
-//TODO: Mirar como hacer bien lo del output.
-//TODO: Quizás estaría bien que se le pudiera pasar una ruta de output.
 public class DataMatrix {
 
     // Output de la imagen.
@@ -40,13 +38,5 @@ public class DataMatrix {
         ImageIO.write(bufferedImage, "jpg", baos);
         byte[] bytes = baos.toByteArray();
         return bytes;
-    }
-
-    public void consultarArticuloConDataMatrix(ImageIO imagen) {
-//        ImageIO.read
-    }
-
-    public void imprimirDataMatrix() {
-//        PrintStream
     }
 }
